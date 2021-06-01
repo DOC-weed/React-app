@@ -1,3 +1,4 @@
+/*Cambios en branch Develp*/
 .App {
   text-align: center;
 }
@@ -14,7 +15,7 @@
 }
 
 .App-header {
-  background-color: #055b24;
+  background-color: red;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
