@@ -1,5 +1,6 @@
 /*Cambios en branch Develp*/
 /*Cambio 2  de Branch en Develop*/
+/*Cambio 3 de Branch en Develop*/
 .App {
   text-align: center;
 }
@@ -16,7 +17,7 @@
 }
 
 .App-header {
-  background-color: orange;
+  background-color: orangered;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,7 +28,7 @@
 }
 
 .App-link {
-  color: #2ec258;
+  color: greenyellow;
 }
 
 @keyframes App-logo-spin {
