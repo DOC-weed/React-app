@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import HeaderComponent from './components/HeaderComponent';
+import FooterComponent from './components/FooterComponent';
 
 ReactDOM.render(
   <React.StrictMode>
+    <HeaderComponent />
     <App />
+    <FooterComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
