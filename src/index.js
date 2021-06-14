@@ -8,11 +8,12 @@ import FooterComponent from './components/FooterComponent';
 import Home from './components/Home';
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './components/login';
 
 ReactDOM.render(
   <React.StrictMode>
     <HeaderComponent />
-    <Home/>
+    <App/>
     <FooterComponent />
   </React.StrictMode>,
   document.getElementById('root')
