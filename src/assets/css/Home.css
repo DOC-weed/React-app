@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+
+.FirstSlide{
+    position: relative;
+    height: 850px;
+    width: 100%;  
+}
+.seccion{
+    background-color: wheat;
+    width: 100%;
+    height: 400px;
+   
+}
+.contenedor{
+    position: relative;
+    padding: 5%;
+    padding-left: 500px;
+    width: 100%;
+    height: 450px;
+    background-image: url('/src/assets/images/Bckground.png');
+    background-color: #F5F5F5;
+   text-align: center;
+}
+
+.letras{
+    position: relative;
+     font-size: 20px;    
+}
+.segundaSeccion{
+    position: relative;
+    width: 100%;
+    height: 670px;
+    background-image: url('../images/Background2.png');
+}
+.video{
+    position: relative;
+    padding-top: 2%;
+    padding-left: 5%;
+}
+.tittle2{
+    position: relative;
+    padding-left: 70%;
+    margin-top: -30%;
+    color: white;
+}
+

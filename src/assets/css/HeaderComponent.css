@@ -1,0 +1,15 @@
+.HeaderBackground{
+    background-color: transparent;
+}
+.navegacion {
+    color: white;
+    font-size: 24px;
+}
+.pagina{
+    position: relative;
+    width: 350px;
+    height: 80px;
+}
+.fondo{
+    background-color: rgba(0, 0, 0, 0.425);
+}
