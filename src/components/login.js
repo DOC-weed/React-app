@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../assets/css/login.css';
 import Home from '../components/Home';
+import axios from 'axios'
 
 export default function Login() {
     const [email, setEmail] = React.useState('');
@@ -12,22 +13,22 @@ export default function Login() {
 
     let history = useHistory();
 
-    function submitform() {
-        let bool;
-
-        if (email === 'andres@ceos.com' && pass === "Andres123$") {
-            setLoggedIn(true);
-
-        }
-        bool = loggedIn;
-        console.log('Email: ' + email + ' pass:' + pass);
-        history.push("/home");
-        return bool;
+    async function submitform() {
+        let bool = false;
+        await axios.get(`https://back-end-dwi.herokuapp.com/users`).then((r => {
+            for(const i of r.data){
+                if(i.email == email && i.password == pass){
+                 bool = true;  
+                }
+            }
+            if(bool){
+                console.log('Email: ' + email + ' pass:' + pass);
+                history.push("/home");
+            }else{
+                alert('Email o Contraseña incorrectos')
+            }
+        }))
     }
-
-    useEffect(()=>{
-        console.log(loggedIn)
-    },[loggedIn])
 
     return (
         <div className="my-5 py-5">
