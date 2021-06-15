@@ -1,72 +1,65 @@
-import React from 'react';
-import {BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../assets/css/login.css';
 import Home from '../components/Home';
 
-class Login extends React.Component{
+export default function Login() {
+    const [email, setEmail] = React.useState('');
+    const [pass, setPass] = React.useState('');
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
-    constructor (props){
-        super(props);
-    }
-    componentDidMount() {
-        console.log(this.props);
-    }
+    let history = useHistory();
 
-    state = {email: '', pass:''};
-    loggedIn = false;
-  
-      submitform=()=> {
-          let bool;
-          
-          if(this.state.email === 'andres@ceos.com'&& this.state.pass==="Andres123$"){
-              this.loggedIn = true;
+    function submitform() {
+        let bool;
 
-              
-          }
-          bool = this.loggedIn;
-        console.log('Email: ' + this.state.email+' pass:'+this.state.pass);
-        console.log(this.loggedIn);
+        if (email === 'andres@ceos.com' && pass === "Andres123$") {
+            setLoggedIn(true);
+
+        }
+        bool = loggedIn;
+        console.log('Email: ' + email + ' pass:' + pass);
+        history.push("/home");
         return bool;
-      }
-    render(){
-        return(
-            <div className="my-5 py-5">
+    }
+
+    useEffect(()=>{
+        console.log(loggedIn)
+    },[loggedIn])
+
+    return (
+        <div className="my-5 py-5">
             <div className="container_login">
                 <h2 className="my-2 color-primary">LOGIN</h2>
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email"  
-                    value={this.state.email} 
-                    onChange={e => this.setState({email:e.target.value})} />
-                </Form.Group>
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)} />
+                    </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" 
-                    value={this.state.pass} 
-                    onChange={e => this.setState({pass:e.target.value})}/>
-                </Form.Group>
-                
-                <Button variant="primary" type="button"
-                onClick={this.submitform}>
-                    Login
-                </Button>
-                
-            </Form>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password"
+                            value={pass}
+                            onChange={e => setPass(e.target.value)} />
+                    </Form.Group>
 
+                    <Button variant="primary" type="button"
+                        onClick={submitform}>
+                        Login
+                    </Button>
 
-            </div> 
+                </Form>
 
 
             </div>
-        )
 
-    }
 
+        </div>
+    )
 
 }
-
-export default Login;   
