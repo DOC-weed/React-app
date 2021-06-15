@@ -15,7 +15,7 @@ class Home extends React.Component{
     render(){
         return(
           <>
-            <Carousel>
+            <Carousel className="carrusel_custom">
   <Carousel.Item>
     <img
       className="FirstSlide"

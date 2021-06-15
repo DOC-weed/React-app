@@ -5,7 +5,7 @@ import logo from '../assets/images/logo.png';
 class FooterComponent extends React.Component {
     render() {
         return ( 
-            <div className="container">
+            <div className="container_footer">
                 <div className="img-container">
                     <img className="img" src={logo} alt="" />
                 </div>
