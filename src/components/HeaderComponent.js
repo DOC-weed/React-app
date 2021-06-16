@@ -15,7 +15,7 @@ class HeaderComponent extends React.Component {
             <Navbar className="fondo" scrolling dark expand="md" >
                 <Navbar.Brand href="#home"><img className="pagina" src={logoPagina} alt="" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="justify-content-end" >
                     <Nav.Link  className="navegacion" style={{color: 'white'}}>Us</Nav.Link>
                     <Nav.Link className="navegacion" style={{color: 'white'}}>Contact Us</Nav.Link>
