@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 're
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../assets/css/login.css';
-import Home from '../components/Home';
+import Home from './Home';
 import axios from 'axios'
 
 export default function Login() {

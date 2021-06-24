@@ -5,16 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
-import Home from './components/Home';
+import Home from './pages/Home';
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/login';
+import Login from './pages/login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HeaderComponent />
     <App/>
-    <FooterComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
