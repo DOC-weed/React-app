@@ -1,0 +1,16 @@
+#containerProduct{
+    margin: 20px;
+}
+
+.imgList{
+    background-color: turquoise;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.primaryImg{
+    background-color: violet;
+    width: 100%;
+    height: 400px;
+}

@@ -1,0 +1,111 @@
+#menuProveedor{
+    height: 100vh;
+    background-color: #36393b;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+#imgProfile {
+    margin: 10px auto;
+    width: 30%;
+    border-radius: 50%;
+    border: black 1px solid;
+    display: flex;
+}
+
+#products{
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+#btn-mas{
+  display: none;
+}
+.containerAdd{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+
+}
+
+.icon-mas2{
+  display: block;
+  text-decoration: none;
+  background: #afd0d6;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  font-weight: bolder;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 13px 10px 10px rgba(0, 0, 0, 0.4);
+  transition: all 500ms ease;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.Wallet{
+  text-align: right;
+}
+
+table a{
+  text-align: center;
+  margin: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+table Link{
+  text-decoration: none;
+}
+
+.btn-editSeller button{
+  margin: 10px;
+}
+
+  
+#myInput {
+    background-image: url('../images/searchIcon.png');
+    background-size: 25px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+  
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+  }
+  
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  #myTable tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  @media (max-width: 750px) {
+    *{
+      font-size: 10px !important;
+    }
+    #menuProveedor{
+      height: auto;
+      width: 100%;
+    }
+  }

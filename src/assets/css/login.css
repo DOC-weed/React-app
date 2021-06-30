@@ -3,11 +3,16 @@
     margin: auto;
     padding: 20px 30px 20px 30px;
     background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .container_login h2 {
     text-align: center;
 }
+
 
 @media (max-width:500px) {
     .container_login {
