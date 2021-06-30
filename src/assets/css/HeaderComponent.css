@@ -2,19 +2,29 @@
     background-color: transparent;
 }
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 .navegacion {
     color: white;
-    font-size: 24px;
 }
 
 .pagina {
-    position: relative;
     width: 250px;
     object-fit: cover;
 }
 
 .fondo {
     background-color: rgba(0, 0, 0, 0.425);
+}
+
+.searchBar {
+    width: 500px;
 }
 
 @media (max-width:500px) {
