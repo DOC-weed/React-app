@@ -1,48 +1,149 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
-.FirstSlide {
-    position: relative;
-    height: 850px;
+html, body {
+    margin: 0; padding: 0;
+  }
+.father{
+    display: flex;
     width: 100%;
+ 
 }
-
-.seccion {
-    background-color: wheat;
+.childrenone img{
     width: 100%;
-    height: 400px;
+    object-fit: cover;
 }
-
-.contenedor {
-    position: relative;
-    padding: 5%;
-    padding-left: 500px;
-    width: 100%;
-    height: 450px;
-    background-image: url('/src/assets/images/Bckground.png');
-    background-color: #F5F5F5;
+.btn-primary{
+    background-color: #A5D8FF!important;
+    border-color: #A5D8FF!important;
+}
+.childrenone h2{
     text-align: center;
+    padding: 3%;
 }
-
-.letras {
-    position: relative;
-    font-size: 20px;
+.childrenone{
+    width: 20%;
+    background-color: #AFD0D6;
+    border-color: transparent;
+    border-style: solid;
+    z-index: 1;
+    margin-top: 52%;
 }
-
-.segundaSeccion {
-    position: relative;
+/**morado*/
+.childrentwo{
+    width: 80%;
+    background-color: transparent;
+    z-index: 1;
+}
+.promos{
     width: 100%;
-    height: 670px;
-    background-image: url('../images/Background2.png');
+    margin-top: 5%;
 }
+/*rojo*/
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: transparent;
+    margin-top: 65%;
+    padding-top: 15px;
+}
+/*wheat*/
+.products .children_products{
+    background-color: transparent;
+    margin: 10px;
+    width: 22%;
+    margin-left: 2%;
+   
+}
+.product{
+    width: 18rem;
+    padding:5%;
 
-.video {
-    position: relative;
-    padding-top: 2%;
-    padding-left: 5%;
 }
+.slider-wrap {
+    width: 100%;
+    height:600px;
+    position: relative;
+  }
+  .single-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    animation: slider-animation;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    background-size: cover;
+  }
+  #slide-1 {background-color: red; background-image: url(../images/Slider1.png);}
+  #slide-2 {background-color: rebeccapurple; animation-delay: 5s; background-image: url(../images/Slider2.png);}
+  #slide-3 {background-color: orange; animation-delay: 10s; background-image: url(../images/Slider3.png);}
+  #slide-4 {background-color: blue; animation-delay: 15s; background-image: url(../images/Slider4.png);}
+  #slide-5 {background-color: green; animation-delay: 20s; background-image: url(../images/Slider5.png);}
+  
+  @keyframes slider-animation {
+    
+    0% {
+        opacity: 0;
+    }
+    6% {
+        opacity: 1;
+    }
+    24% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    }
+    
 
-.tittle2 {
-    position: relative;
-    padding-left: 70%;
-    margin-top: -30%;
-    color: white;
-}
+    @media (max-width:1548px){
+        .products{
+            margin-left: 20%;
+            margin-top:590px ;
+        }
+        .childrentwo{
+            width: 70%;
+            
+        }
+
+    }
+
+
+    @media  (max-width:900px) {
+        .products{
+            margin-left: 43%;
+            flex-direction: column;
+            margin-top: 545px;
+        }
+        .childrenone{
+            margin-top: 550px;
+        } 
+
+    }
+    @media (max-width:700px){
+        .products{
+            margin-left: 43%;
+        }
+
+    }
+
+    
+    @media (max-width:600px){
+        .products{
+            margin-left: -10px;
+        }
+        .product{
+            width: 20rem;
+        }
+        .childrenone{
+            margin-top: 4280px;
+     
+        }
+        .promos{
+           width: 20rem;
+        }
+   }
+    
