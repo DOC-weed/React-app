@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../assets/css/login.css';
-import Home from './Home';
+import Home2 from './Home2';
 import logo from '../assets/images/logo.png';
 import axios from 'axios'
 import swal from 'sweetalert';
 import HeaderComponent from '../components/HeaderComponent';
+import { useHistory } from 'react-router';
 
 
 
@@ -37,7 +38,7 @@ export default function Login() {
             localStorage.setItem('token', r.data.token);
             localStorage.setItem('_id',r.data.id);
             console.log(r);
-            history.push("/home1");
+            history.push("/home");
             
         })).catch((err =>{
             console.log(err);
@@ -68,26 +69,26 @@ export default function Login() {
             await axios.post(url+'/auth/singin',obj).then((res => {
 
                 let customer_id = res.data.id;
+                console.log(customer_id);
                 axios.get(url+'/customer/'+customer_id).then(res2 =>{
-                    if(res.data.customer_type !== 'seller'){
+                    console.log(res2.data.customer_type);
+                    if(res2.data.customer_type !== "seller"){
                         swal({
                             title: "Ouups!",
-                            text: "Your account isn't ",
+                            text: "Your account is not a seller's account, please log in as a buyer or update your account here",
                             icon: "info"
                         });
+                    }else{
+                        localStorage.setItem('token', res.data.token);
+                        localStorage.setItem('_id',res.data.id);
+                        console.log(res);
+                        history.push("/seller/profile");
                     }
                     console.log(res2);
 
                 }).catch(err =>{
                     console.log(err);
                 });
-
-
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('_id',res.data.id);
-                console.log(res);
-                history.push("/home1");
-                
             })).catch((err =>{
                 console.log(err);
                 swal({

@@ -6,8 +6,33 @@
     display: block;
 }
 
+.bg-custom-1 {
+    background-color: #A5D8FF;
+    border-color: #A5D8FF;
+}
+
+.bg-custom-2 {
+    background-color: #C49799;
+    border-color: #C49799;
+}
+
+.bg-custom-3 {
+    background-color: #AFD0D6!important;
+    border-color: #AFD0D6!important;
+    color: #333;
+}
+
+.bg-custom-3 a {
+    text-decoration: none;
+    color: #333;
+}
+
 .hide {
     display: none;
+}
+
+.primary-navbar {
+    width: 100%;
 }
 
 .navegacion {
@@ -21,14 +46,44 @@
 
 .fondo {
     background-color: rgba(0, 0, 0, 0.425);
+    width: 100%;
 }
 
 .searchBar {
-    width: 500px;
+    width: 50%;
+}
+
+.nav_bar {}
+
+.button_form {
+    width: 20%
+}
+
+.input_form {
+    width: 70%!important;
+}
+
+.span {
+    font-size: 20px!important;
+    padding: 10px!important;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width:992px) {
+    .navbar-nav {
+        flex-direction: row!important;
+    }
 }
 
 @media (max-width:500px) {
     .pagina {
         width: 150px;
+    }
+    .justify-content-end {
+        justify-content: space-around!important;
     }
 }
