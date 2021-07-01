@@ -94,9 +94,9 @@ export default function ProveedorPage(props) {
                             </div>
                         </div>
                         <div class="form-group btn-actions">
-                            <Link to="/seller/profile"><button className="btn btn-danger" type="button">Cancelar</button></Link>
-                            <button className="btn btn-info" type="button">Limpiar</button>
-                            <button className="btn guardar" type="button">Guardar</button>
+                            <Link to="/seller/profile"><button className="btn btn-danger" type="button">Cancel</button></Link>
+                            <button className="btn btn-info" type="button">Clear</button>
+                            <button className="btn guardar" type="button">Save</button>
                         </div>
                     </form>
                 </div>

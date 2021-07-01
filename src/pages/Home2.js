@@ -7,6 +7,7 @@ import { BiEdit } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import { GrAdd } from 'react-icons/gr'
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 
@@ -38,6 +39,7 @@ export default function Home2() {
     const [phone, setPhone] = React.useState(4491114685)
 
     const [editSeller, setEditSeller] = React.useState(false);
+    const [mode, setMode] = React.useState(false);
 
     function myFunction(e) {
         const { value } = e.target;
@@ -62,7 +64,7 @@ export default function Home2() {
         }
     }
 
-    function Guardar() {
+    function Save() {
         setEditSeller(false);
         setSellerData([{
             id: 1,
@@ -82,15 +84,16 @@ export default function Home2() {
         }]);
     }
 
-    function Cancelar() {
+    function Cancel() {
         setEditSeller(false);
         setName(sellerData[0].full_name);
         setPhone(sellerData[0].phone);
     }
 
     return (
-        <div id="pricipal" style={{ width: '100%' }}>
+        <div id="pricipal" className={(mode) ? "darkmode" : "normal"} style={{ width: '100%' }}>
             <Header />
+
             <div>
                 <div className="containerAdd">
                     <input type="checkbox" id="btn-mas" />
@@ -100,6 +103,10 @@ export default function Home2() {
                 </div>
                 <div className="row" style={{ width: "100%", margin: '0', padding: '0' }}>
                     <div id="menuProveedor" className="col-sm-12 col-md-4 col-lg-3">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" value={mode} onChange={(e) => setMode(e.target.checked)} id="customSwitch1" />
+                            <label class="custom-control-label" for="customSwitch1">Dark Mode</label>
+                        </div>
                         {(!editSeller) ?
                             <a onClick={() => setEditSeller(true)} id={editSeller}>
                                 <BiEdit style={{ display: 'flex', width: '40px', height: '40px', cursor: 'pointer' }} />
@@ -147,8 +154,8 @@ export default function Home2() {
                         }
                         {(editSeller) ?
                             <div className="btn-editSeller">
-                                <button className="btn guardar" onClick={Guardar}>Guardar</button>
-                                <button className="btn btn-danger" onClick={Cancelar}>Cancelar</button>
+                                <button className="btn save" onClick={Save}>Save</button>
+                                <button className="btn btn-danger" onClick={Cancel}>Cancel</button>
                             </div>
                             :
                             ''
@@ -184,7 +191,24 @@ export default function Home2() {
                                                     <Link to={`/products/${sellerData[0].id}/${p.id}`} >
                                                         <BiEdit />
                                                     </Link>
-                                                    <a onClick={() => console.log('eliminar' + p.id)}>
+                                                    <a onClick={() => {
+                                                        swal({
+                                                            title: `DELETE PRODUCT ${p.name}`,
+                                                            text: "Are you sure to remove this product?",
+                                                            icon: "warning",
+                                                            buttons: true,
+                                                            dangerMode: true,
+                                                        })
+                                                            .then((willDelete) => {
+                                                                if (willDelete) {
+                                                                    swal("Product has been deleted!", {
+                                                                        icon: "success",
+                                                                    });
+                                                                } else {
+                                                                    
+                                                                }
+                                                            });
+                                                    }}>
                                                         <MdDelete />
                                                     </a>
                                                 </td>
