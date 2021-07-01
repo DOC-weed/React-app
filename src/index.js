@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/login';
 
 ReactDOM.render(
+
   <React.StrictMode>
     <App/>
   </React.StrictMode>,
