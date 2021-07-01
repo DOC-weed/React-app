@@ -18,35 +18,36 @@ export default function Login() {
     const [loggedIn, setLoggedIn] = React.useState(false);
 
     let history = useHistory();
+    let url = 'http://localhost:4000';
 
     async function submitformBuyer() {
-       if((email == '' && pass =='')||(email ==''||pass=='')){
+
+        if((email == '' && pass =='')||(email ==''||pass=='')){
         swal({
             title: "Ouups!",
             text: "Email or password empty, please enter your credentials.",
             icon: "error"
           });
-       }else{
-        let bool = false;
-        await axios.get(`https://back-end-dwi.herokuapp.com/users`).then((r => {
-
-            for(const i of r.data){
-                if(i.email == email && i.password == pass){
-                 bool = true;  
-                }
-            }
-            if(bool){
-                console.log('Email: ' + email + ' pass:' + pass);
-                history.push("/home");
-            }else{
-                swal({
-                    title: "Ouups!",
-                    text: "Wrong email or password",
-                    icon: "error"
-                });
-                
-            }
+        }else{
+        const obj ={
+            email:email,
+            password:pass
+        }
+        await axios.post(url+'/auth/singin',obj).then((r => {
+            localStorage.setItem('token', r.data.token);
+            localStorage.setItem('_id',r.data.id);
+            console.log(r);
+            history.push("/home1");
+            
+        })).catch((err =>{
+            console.log(err);
+            swal({
+                title: "Ouups!",
+                text: "Wrong email or password",
+                icon: "error"
+            });
         }))
+
 
        }
     
@@ -60,27 +61,40 @@ export default function Login() {
                 icon: "error"
               });
            }else{
-            let bool = false;
-            await axios.get(`https://back-end-dwi.herokuapp.com/users`).then((r => {
+            const obj ={
+                email:email,
+                password:pass
+            }
+            await axios.post(url+'/auth/singin',obj).then((res => {
 
-                /*
-                ** validation if a buyer wants to login in seller
-                */
-                
-                for(const i of r.data){
-                    if(i.email == email && i.password == pass){
-                     bool = true;  
+                let customer_id = res.data.id;
+                axios.get(url+'/customer/'+customer_id).then(res2 =>{
+                    if(res.data.customer_type !== 'seller'){
+                        swal({
+                            title: "Ouups!",
+                            text: "Your account isn't ",
+                            icon: "info"
+                        });
                     }
-                }
-                if(bool){
-                    history.push("/home");
-                }else{
-                    swal({
-                        title: "Ouups!",
-                        text: "Wrong email or password",
-                        icon: "error"
-                      });
-                }
+                    console.log(res2);
+
+                }).catch(err =>{
+                    console.log(err);
+                });
+
+
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('_id',res.data.id);
+                console.log(res);
+                history.push("/home1");
+                
+            })).catch((err =>{
+                console.log(err);
+                swal({
+                    title: "Ouups!",
+                    text: "Wrong email or password",
+                    icon: "error"
+                });
             }))
 
            }
