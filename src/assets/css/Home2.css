@@ -71,7 +71,7 @@ table Link{
   margin: 10px;
 }
 
-.guardar{
+.save{
   border: 1px solid #a5d8ff !important;
   background-color: #a5d8ff !important;
 }
@@ -120,4 +120,21 @@ table Link{
     #imgProfile {
       width: 30%;
   }
+  }
+
+  .darkmode{
+    background-color: rgba(32, 32, 44, 0.9);
+    color: white;
+  }
+
+  .darkmode thead:hover{
+    background-color: gray !important;
+  }
+
+  .darkmode tr:hover{
+    background-color: gray !important;
+  }
+
+  .darkmode #menuProveedor{
+    background-color: rgba(32, 32, 44);;
   }
