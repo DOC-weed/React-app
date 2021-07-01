@@ -3,12 +3,16 @@
     background-color: #36393b;
     text-align: center;
     color: white;
-    font-weight: bolder;
+    padding: 2%;
+}
+
+#menuProveedor p{
+  font-size: 20px;
 }
 
 #imgProfile {
     margin: 10px auto;
-    width: 30%;
+    width: 50%;
     border-radius: 50%;
     border: black 1px solid;
     display: flex;
@@ -16,7 +20,7 @@
 
 #products{
   font-size: 30px;
-  font-weight: bolder;
+  padding-top: 2%;
 }
 
 #btn-mas{
@@ -67,6 +71,11 @@ table Link{
   margin: 10px;
 }
 
+.guardar{
+  border: 1px solid #a5d8ff !important;
+  background-color: #a5d8ff !important;
+}
+
   
 #myInput {
     background-image: url('../images/searchIcon.png');
@@ -102,10 +111,13 @@ table Link{
 
   @media (max-width: 750px) {
     *{
-      font-size: 10px !important;
+      font-size: 15px !important;
     }
     #menuProveedor{
       height: auto;
       width: 100%;
     }
+    #imgProfile {
+      width: 30%;
+  }
   }

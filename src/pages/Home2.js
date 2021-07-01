@@ -17,8 +17,8 @@ export default function Home2() {
         full_name: "Erik Daniel Mendoza Olivares",
         email: "erikmendozaolivares@gmail.com",
         password: "edmo12345",
-        billing_address: "",
-        shipping_address: "",
+        billing_address: "5 de mayo #101 zona centro C.P 20000",
+        shipping_address: "5 de mayo #101 zona centro C.P 20000",
         country: "",
         phone: "4491114685",
         customer_type: "seller",
@@ -112,7 +112,6 @@ export default function Home2() {
                                     <img id="imgProfile" src={profile} alt="profileImg" />
                                     {(editSeller) ?
                                         <>
-                                            <input type="file" />
                                             <form style={{ textAlign: 'left', margin: '20px', }}>
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
@@ -122,6 +121,14 @@ export default function Home2() {
                                                     <label for="name">Phone Number</label>
                                                     <input type="number" class="form-control" value={phone} id="phone" placeholder="Phone number" onChange={(e) => setPhone(e.target.value)} />
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="name">Billing Address</label>
+                                                    <input type="text" class="form-control" id="phone" placeholder="Billing Address" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name">Shipping Address</label>
+                                                    <input type="text" class="form-control" id="phone" placeholder="Shipping Address" />
+                                                </div>
                                             </form>
                                         </>
                                         :
@@ -129,6 +136,8 @@ export default function Home2() {
                                             <p>{s.full_name}</p>
                                             <p>{s.email}</p>
                                             <p>Phone: {s.phone}</p>
+                                            <p>Billing Address: {s.billing_address}</p>
+                                            <p>Shipping Address: {s.shipping_address}</p>
                                         </>
                                     }
 
@@ -137,8 +146,8 @@ export default function Home2() {
                         }
                         {(editSeller) ?
                             <div className="btn-editSeller">
-                                <button className="button btn-primary" onClick={Guardar}>Guardar</button>
-                                <button className="button btn-danger" onClick={Cancelar}>Cancelar</button>
+                                <button className="btn guardar" onClick={Guardar}>Guardar</button>
+                                <button className="btn btn-danger" onClick={Cancelar}>Cancelar</button>
                             </div>
                             :
                             ''
