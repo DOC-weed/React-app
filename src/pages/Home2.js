@@ -163,7 +163,7 @@ export default function Home2() {
 
 
                     </div>
-                    <div className="col-sm-12 col-md-8 col-lg-9">
+                    <div className="col-sm-11 col-md-8 col-lg-9" style={{overflow:'hidden',width:'100%'}}>
                         <>
                             <p id="products">My Products List</p>
 
@@ -221,6 +221,7 @@ export default function Home2() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

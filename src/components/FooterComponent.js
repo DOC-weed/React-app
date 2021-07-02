@@ -10,9 +10,7 @@ class FooterComponent extends React.Component {
                 <div className="kawaii-container">
                     <img src={kawaii} />
                 </div>
-                <div className="img-container">
-                    <img className="img" src={logo} alt="" />
-                </div>
+                
                 <div className="text-container">
                     <p className="text">This project was developed by students from the Universidad Tecnologica de Aguascalientes</p>
                 </div>

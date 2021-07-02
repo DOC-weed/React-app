@@ -31,6 +31,7 @@
 
 .childrentwo {
     width: 80%;
+    display: grid;
     background-color: transparent;
 }
 
@@ -50,17 +51,24 @@
 /*rojo*/
 
 .products {
+    display: block;
+}
+
+.products_container {
     display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px;
+}
+
+.children_products {
+    width: 20%;
 }
 
 
 /*wheat*/
 
 @media (max-width:900px) {
-    .products {
-        margin-left: 43%;
-        flex-direction: column;
-    }
     .childrenone {}
 }
 

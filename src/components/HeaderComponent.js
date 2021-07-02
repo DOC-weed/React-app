@@ -85,10 +85,10 @@ export default function Header() {
             </Navbar>
            
                 <Nav className="navbar justify-content-center bg-custom-3" >
-                    <Nav.Link className="" >About us</Nav.Link>
-                    <Nav.Link className="" >Contact us</Nav.Link>
-                    <Nav.Link className="">Vision</Nav.Link>
-                    <Nav.Link className="">Mision </Nav.Link>
+                    <Nav.Link className="" href="/us" >About us</Nav.Link>
+                    <Nav.Link className="" href="/contactus" >Contact us</Nav.Link>
+                    <Nav.Link className="" href="/vision">Vision</Nav.Link>
+                    <Nav.Link className="" href="/mision">Mision </Nav.Link>
                 </Nav>
 
             
