@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../assets/css/login.css';
@@ -23,7 +23,7 @@ export default function Login() {
 
     async function submitformBuyer() {
 
-        if((email == '' && pass =='')||(email ==''||pass=='')){
+        if((email === '' && pass ==='')||(email ===''||pass==='')){
         swal({
             title: "Ouups!",
             text: "Email or password empty, please enter your credentials.",
@@ -105,7 +105,6 @@ export default function Login() {
 
     return (
         <>
-        
         <div className="background_container">
              
             <div className="backgroun_login">
@@ -173,7 +172,7 @@ export default function Login() {
                 
                 </div>}  
                 <div className="form">
-                    <p>Don't you have an account yet? Create an account as a seller or buyer <a href="#">here</a>.</p>
+                    <p>Don't you have an account yet? Create an account as a seller or buyer <Link to="/register"><a href="#">here</a></Link>.</p>
                 </div>
             </div>
             </div>

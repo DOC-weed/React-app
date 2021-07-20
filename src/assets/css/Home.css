@@ -25,30 +25,29 @@
 .childrenone {
     width: 20%;
     background-color: #AFD0D6;
-    border-color: transparent;
-    border-style: solid;
+    padding: 10px;
 }
 
 .childrentwo {
     width: 80%;
+    padding: 20px;
+}
+
+.conttt {
     display: grid;
-    background-color: transparent;
-}
-
-.img-slider {
-    height: 100vh;
-    object-fit: cover;
-}
-
-
-/**morado*/
-
-.promos {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
     width: 100%;
 }
 
+.container_1_home {
+    height: 500px;
+}
 
-/*rojo*/
+.img-slider {
+    height: 500px;
+    object-fit: cover;
+}
 
 .products {
     display: block;
@@ -65,28 +64,17 @@
     width: 20%;
 }
 
-
-/*wheat*/
-
 @media (max-width:900px) {
-    .childrenone {}
-}
-
-@media (max-width:700px) {
-    .products {
-        margin-left: 43%;
+    .childrenone {
+        display: none;
+    }
+    .childrentwo {
+        width: 100%;
     }
 }
 
 @media (max-width:600px) {
-    .products {
-        margin-left: -10px;
-    }
-    .product {
-        width: 20rem;
-    }
-    .childrenone {}
-    .promos {
-        width: 20rem;
+    .conttt {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

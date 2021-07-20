@@ -8,6 +8,7 @@ import ContactUs from './pages/contactUs';
 import Us from './pages/us';
 import Mision from './pages/mision';
 import Vision from './pages/vision';
+import Register from './pages/registerUser';
 
 import {BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
 
@@ -18,6 +19,9 @@ function App() {
      <Switch>
        <Route path="/login" exact={true} >
          <Login/> 
+       </Route>
+       <Route path="/register" exact={true} >
+         <Register/> 
        </Route>
        <Route path="/contactus" exact={true} >
          <ContactUs/> 

@@ -72,7 +72,7 @@ export default function Header() {
                         <Button className="" variant="secondary"><span className=""><GrFormSearch/></span></Button>
                     </Form>
                     <Nav className="justify-content-end nav_bar" > 
-                        {(!checkCustomer)?<Nav.Link to="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
+                        {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
                         {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-2 span">Sign in</span></Nav.Link>:""}
                         <Nav.Link style={{ color: 'white' }} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span class="badge bg-secondary">0</span></span></Nav.Link>
                         {(customer.customer_type === 'seller') ?

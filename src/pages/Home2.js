@@ -92,7 +92,7 @@ export default function Home2() {
 
     return (
         <div id="pricipal" className={(mode) ? "darkmode" : "normal"} style={{ width: '100%' }}>
-            <Header />
+            
 
             <div>
                 <div className="containerAdd">
@@ -221,7 +221,7 @@ export default function Home2() {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            
         </div>
     )
 }
