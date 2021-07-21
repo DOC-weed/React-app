@@ -79,7 +79,8 @@ export default function ProveedorPage(props) {
         event.target.select();
     }
 
-    async function Save() {
+    async function Save(event) {
+        event.preventDefault();
         let objcategory = {};
         for (const c of categories) {
             if (category == c._id) {
@@ -119,39 +120,35 @@ export default function ProveedorPage(props) {
 
     return (
         <div style={{ width: '100%' }}>
-<<<<<<< HEAD
-
-=======
         <Header/>
->>>>>>> 25867a7bdffe4aba817da82184bdc8daf12a2035
             <div className="row" id="containerProduct">
                 <div className="col-sm-12 col-md-12 col-lg-9" style={{ width: '100%', margin: 'auto' }}>
-                    <form className="form_containerProducto">
+                    <form className="form_containerProducto" onSubmit={Save}>
                         <div class="form-group">
                             <div className="row">
                                 <div className="col-sm-12 col-md-3 col-lg-3" onFocus={onFocus}>
                                     <label for="name">Product code: </label>
-                                    <input type="text" onFocus={onFocus} class="form-control" id="code" placeholder="Product code..." onChange={(e) => setProductCode(e.target.value)} value={productCode}/>
+                                    <input type="text" required onFocus={onFocus} class="form-control" id="code" placeholder="Product code..." onChange={(e) => setProductCode(e.target.value)} value={productCode}/>
                                 </div>
                                 <div className="col-sm-12 col-md-9 col-lg-9">
                                     <label for="name">Product name: </label>
-                                    <input type="text" onFocus={onFocus} class="form-control" id="name" placeholder="Enter product name..." onChange={(e) => setName(e.target.value)} value={name}/>
+                                    <input type="text" required onFocus={onFocus} class="form-control" id="name" placeholder="Enter product name..." onChange={(e) => setName(e.target.value)} value={name}/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description: </label>
-                            <textarea class="form-control" onFocus={onFocus} id="description" rows="4" onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
+                            <textarea class="form-control" required onFocus={onFocus} id="description" rows="4" onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
                         </div>
                         <div class="form-group">
                             <div className="row">
                                 <div className="col-sm-12 col-md-6 col-lg-6" onFocus={onFocus}>
                                     <label for="price">Price: </label>
-                                    <NumberFormat onFocus={onFocus} className="form-control numberFormat" value={(price)} name="price" id="price" thousandSeparator={true} prefix={'$'} decimalScale={2} onValueChange={(values) => setPriceValue(values)} onBlur={handleBlur} />
+                                    <NumberFormat onFocus={onFocus} required className="form-control numberFormat" value={(price)} name="price" id="price" thousandSeparator={true} prefix={'$'} decimalScale={2} onValueChange={(values) => setPriceValue(values)} onBlur={handleBlur} />
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-6">
                                     <label for="stock">Stock: </label>
-                                    <NumberFormat onFocus={onFocus} className="form-control numberFormat" name="stock" value={stock} id="stock" thousandSeparator={true} decimalScale={2} onValueChange={(values) => setStockValue(values)} onBlur={handleBlur} />
+                                    <NumberFormat onFocus={onFocus} required className="form-control numberFormat" name="stock" value={stock} id="stock" thousandSeparator={true} decimalScale={2} onValueChange={(values) => setStockValue(values)} onBlur={handleBlur} />
                                 </div>
                             </div>
                         </div>
@@ -161,7 +158,7 @@ export default function ProveedorPage(props) {
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-6">
                                     <label for="select">Categories: </label>
-                                    <select class="form-control" aria-label="Default select example" value={category} onChange={ChangeCategory}>
+                                    <select class="form-control" aria-label="Default select example" value={category} required onChange={ChangeCategory}>
                                         {
                                             categories.map(c => (
                                                 <option key={c._id} value={c._id}>{c.name}</option>
@@ -188,7 +185,7 @@ export default function ProveedorPage(props) {
                                 <button className="btn btn-danger" type="button">Cancel</button>
                             </Link>
                             <button className="btn btn-info" type="button" onClick={Clear}>Clear</button>
-                            <button className="btn guardar" type="button" onClick={Save}>Save</button>
+                            <button className="btn guardar" type="submit">Save</button>
                         </div>
                     </form>
                 </div>
