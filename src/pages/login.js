@@ -12,20 +12,21 @@ import { useHistory } from 'react-router';
 
 
 
+
 export default function Login() {
     const [email, setEmail] = React.useState('');
     const [pass, setPass] = React.useState('');
     const [show, setShow]=React.useState(false);
     const [loggedIn, setLoggedIn] = React.useState(false);
+    const url ='https://dwi-back-end.herokuapp.com/';
 
     let history = useHistory();
-    let url = 'http://localhost:4000';
 
     async function submitformBuyer() {
 
         if((email === '' && pass ==='')||(email ===''||pass==='')){
         swal({
-            title: "Ouups!",
+            title: "Are you kidding?",
             text: "Email or password empty, please enter your credentials.",
             icon: "error"
           });
@@ -34,9 +35,9 @@ export default function Login() {
             email:email,
             password:pass
         }
-        await axios.post(url+'/auth/singin',obj).then((r => {
+        await axios.post(url+'login',obj).then((r => {
             localStorage.setItem('token', r.data.token);
-            localStorage.setItem('_id',r.data.id);
+            localStorage.setItem('_id',r.data.usuario._id);
             console.log(r);
             history.push("/home");
             
@@ -66,29 +67,20 @@ export default function Login() {
                 email:email,
                 password:pass
             }
-            await axios.post(url+'/auth/singin',obj).then((res => {
-
-                let customer_id = res.data.id;
-                console.log(customer_id);
-                axios.get(url+'/customer/'+customer_id).then(res2 =>{
-                    console.log(res2.data.customer_type);
-                    if(res2.data.customer_type !== "seller"){
-                        swal({
-                            title: "Ouups!",
-                            text: "Your account is not a seller's account, please log in as a buyer or update your account here",
-                            icon: "info"
-                        });
-                    }else{
-                        localStorage.setItem('token', res.data.token);
-                        localStorage.setItem('_id',res.data.id);
-                        console.log(res);
-                        history.push("/seller/profile");
-                    }
-                    console.log(res2);
-
-                }).catch(err =>{
-                    console.log(err);
-                });
+            await axios.post(url+'login/',obj).then((res => {
+                console.log(res);
+                if(res.data.usuario.customer_type !== "seller"){
+                    swal({
+                        title: "Ouups!",
+                        text: "Your account is not a seller's account, please log in as a buyer or update your account here",
+                        icon: "info"
+                    });
+                }else{
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('_id',res.data.usuario._id); 
+                    console.log(res);
+                    history.push("/seller/profile");
+                }
             })).catch((err =>{
                 console.log(err);
                 swal({

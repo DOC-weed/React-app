@@ -57,7 +57,7 @@ export default function ProveedorPage(props) {
 
     return (
         <div style={{ width: '100%' }}>
-        
+        <Header/>
             <div className="row" id="containerProduct">
                 <div className="col-sm-12 col-md-12 col-lg-7" style={{ width: '100%', margin: 'auto' }}>
                     <form>
