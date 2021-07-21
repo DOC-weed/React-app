@@ -55,7 +55,7 @@ class Home extends React.Component {
     {"id":"0b52367e-5ec9-4bee-8d38-f2c8c27621cd","customer_id":"717d822d-d320-4cb7-b544-8714680af0c9","sku":"b82800e7-27bb-4284-b019-fd32b95683c2","name":"Skiba","price":37,"description":"Exfoliation due to erythematous condition involving 50-59 percent of body surface","create_date":"12/8/2020","stock":54}];
     return (
       < >
-        
+        <HeaderComponent/>
         <div className="father">
 
           <div className="container_1_home">

@@ -13,7 +13,6 @@ import Login from './pages/login';
 ReactDOM.render(
 
   <React.StrictMode>
-    <HeaderComponent/>
     <App/>
     <FooterComponent/>
   </React.StrictMode>,

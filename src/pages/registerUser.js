@@ -3,6 +3,9 @@ import '../assets/css/registerUser.css';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 import {validPassword } from '../assets/js/regex.js';
+import DOMPurify from 'dompurify';
+import axios from 'axios';
+import Header from '../components/HeaderComponent';
 
 
 
@@ -16,8 +19,10 @@ export default function RegisterUSer() {
     const [country, setCountry] = React.useState('');
     const [phone, setPhone] = React.useState('');
     const [type, setType] = React.useState('');
+    const url ='https://dwi-back-end.herokuapp.com/';
 
     let history = useHistory();
+    
 
     function back(){
       history.push('/login');
@@ -40,7 +45,7 @@ export default function RegisterUSer() {
       if(!validPassword.test(pass)){
         swal({
           title: "Ouups!",
-          text: "Invalid passwords.",
+          text: "The password must contain at least one numeric digit, one uppercase letter, one lowercase letter, one special character and between 6 to 20 characters.",
           icon: "error"
         });
         return false;
@@ -53,25 +58,56 @@ export default function RegisterUSer() {
     
     async function registerUser(event){
       event.preventDefault();
+     
       let val1 = validatepass2();
       let val2 = validatepass1();
       if(val1 === true && val2 === true){
+      let seller;
+        if(type === 'seller'){
+          seller ={
+            wallet:0,
+            products:[]
+          }
+        }else{
+          seller = null;
+        }
         let obj = {
-          full_name: fullname,
+          full_name:fullname,
           email: email,
           password: pass,
           billing_address: b_address,
           shipping_address: s_address,
           country: country,
           phone: phone,
-          customer_type: type
+          customer_type: type,
+          customer_seller: seller
         }
-        console.log(obj);
+        await axios.post(url+'customer',obj).then(res =>{
+          swal({
+            title: "Let's rock!",
+            text: "User created successfully.",
+            icon: "success"
+          });
+          history.push('/login');
+          
+          
+        }).catch(err =>{
+          swal({
+            title: "D**m!",
+            text: "There was a problem creating the user.",
+            icon: "error"
+          });
+        });
+
+        
         
       }
+      
     }
     return(
-        <>
+        
+      <>
+      <Header/>
         <div className="register_container">
           <div className="form_container">
           <form onSubmit={registerUser}>
