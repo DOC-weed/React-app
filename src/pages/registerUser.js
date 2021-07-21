@@ -3,7 +3,6 @@ import '../assets/css/registerUser.css';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
 import {validPassword } from '../assets/js/regex.js';
-import DOMPurify from 'dompurify';
 import axios from 'axios';
 import Header from '../components/HeaderComponent';
 
@@ -21,6 +20,8 @@ export default function RegisterUSer() {
     const [type, setType] = React.useState('');
     const url ='https://dwi-back-end.herokuapp.com/';
 
+    const [cargando, setCargando] = React.useState(false)
+ 
     let history = useHistory();
     
 
@@ -58,7 +59,9 @@ export default function RegisterUSer() {
     
     async function registerUser(event){
       event.preventDefault();
-     
+
+      setCargando(true)
+
       let val1 = validatepass2();
       let val2 = validatepass1();
       if(val1 === true && val2 === true){
@@ -83,6 +86,7 @@ export default function RegisterUSer() {
           customer_seller: seller
         }
         await axios.post(url+'customer',obj).then(res =>{
+          console.log(res.data)
           swal({
             title: "Let's rock!",
             text: "User created successfully.",
@@ -92,6 +96,7 @@ export default function RegisterUSer() {
           
           
         }).catch(err =>{
+          setCargando(false)
           swal({
             title: "D**m!",
             text: "There was a problem creating the user.",
@@ -178,7 +183,7 @@ export default function RegisterUSer() {
               </div>
             </div>
             <div className="form-group"> 
-              <button className="btn btn-primary mx-1" type="submit">Register</button>
+              <button className="btn btn-primary mx-1" disabled={cargando} type="submit">Register</button>
               <button className="btn btn-danger mx-1" type="button" onClick={back} >Cancel</button>
 
             </div>
