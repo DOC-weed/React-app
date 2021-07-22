@@ -12,34 +12,65 @@ import swal from 'sweetalert';
 
 
 import NumberFormat from 'react-number-format';
+import axios from 'axios';
 
 export default function Home2() {
-    const [sellerData, setSellerData] = React.useState([{
-        id: 1,
-        full_name: "Erik Daniel Mendoza Olivares",
-        email: "erikmendozaolivares@gmail.com",
-        password: "edmo12345",
-        billing_address: "5 de mayo #101 zona centro C.P 20000",
-        shipping_address: "5 de mayo #101 zona centro C.P 20000",
-        country: "",
-        phone: "4491114685",
-        customer_type: "seller",
-        customer_seller: {
-            customer_id: "1",
-            wallet: 0,
-            products_id: [1, 2]
-        }
-    }]);
-    const [products, setProducts] = React.useState([
-        { id: 1, customer_id: 1, sku: null, name: 'Product1', price: 300, description: "", thumbnail: "", image: "", create_date: "", stock: 12, category: { id: 1, name: 'Phone accessories', description: "" } },
-        { id: 2, customer_id: 1, sku: null, name: 'Product2', price: 10000, description: "", thumbnail: "", image: "", create_date: "", stock: 120, category: { id: 2, name: 'Electronics', description: "" } }
-    ]);
+    const [customerId, setCustomerId] = React.useState("60f788ed7d314a001584a20b");
+    const [sellerData, setSellerData] = React.useState([]);
+    const [products, setProducts] = React.useState([]);
 
-    const [name, setName] = React.useState('Erik Daniel Mendoza Olivares')
-    const [phone, setPhone] = React.useState(4491114685)
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [phone, setPhone] = React.useState('');
+    const [billing_address, setBilling_Address] = React.useState('');
+    const [shipping_address, setShipping_Address] = React.useState('');
+    const [country, setCountry] = React.useState('');
+    const [customer_type, setCustomer_Type] = React.useState('');
 
     const [editSeller, setEditSeller] = React.useState(false);
     const [mode, setMode] = React.useState(false);
+
+    useEffect(() => {
+        getSellerData();
+        getProducts();
+    }, []);
+
+    async function getSellerData() {
+        await axios.get(`https://dwi-back-end.herokuapp.com/customer/${customerId}`).then(c => {
+            for (const s of [c.data.customerDB]) {
+                setName(s.full_name);
+                setEmail(s.email)
+                setPhone(s.phone)
+                setBilling_Address(s.billing_address)
+                setShipping_Address(s.shipping_address)
+                setCountry(s.country)
+                setCustomer_Type(s.customer_type)
+            }
+            setSellerData([c.data.customerDB])
+        })
+    }
+
+    async function getProducts() {
+        await axios.get(`https://dwi-back-end.herokuapp.com/productbyseller/${customerId}`).then(async c => {
+            await axios.get(`https://dwi-back-end.herokuapp.com/category`).then(cc => {
+                let arr = [];
+                for (const i of c.data.productDB) {
+                    let category = {};
+                    for (const j of cc.data.category) {
+
+                        if (i.category == j._id) {
+                            category = { _id: j._id, name: j.name, description: j.description }
+                        }
+                    }
+
+                    const obj = { _id: i._id, customer_id: i.customer_id, sku: i.sku, name: i.name, price: i.price, stock: i.stock, category: category }
+
+                    arr.push(obj);
+                }
+                setProducts(arr)
+            })
+        })
+    }
 
     function myFunction(e) {
         const { value } = e.target;
@@ -64,41 +95,56 @@ export default function Home2() {
         }
     }
 
-    function Save() {
-        setEditSeller(false);
-        setSellerData([{
-            id: 1,
+    async function Save(e) {
+        e.preventDefault();
+
+        const obj = {
             full_name: name,
-            email: "erikmendozaolivares@gmail.com",
-            password: "edmo12345",
-            billing_address: "",
-            shipping_address: "",
-            country: "",
+            email: email,
+            billing_address: billing_address,
+            shipping_addresss: shipping_address,
+            country: country,
             phone: phone,
-            customer_type: "seller",
-            customer_seller: {
-                customer_id: "1",
-                wallet: 0,
-                products_id: [1, 2]
-            }
-        }]);
+            customer_type: customer_type
+        }
+
+        await axios.put(`https://dwi-back-end.herokuapp.com/customer/${customerId}`, obj).then(c => {
+            getSellerData();
+            setEditSeller(false);
+            swal({
+                title: "Success!",
+                text: "User saved successfully",
+                icon: "success"
+            });
+        })
+
     }
 
     function Cancel() {
         setEditSeller(false);
-        setName(sellerData[0].full_name);
-        setPhone(sellerData[0].phone);
+        getSellerData();
+    }
+
+    async function deleteProduct(id) {
+        await axios.delete(`https://dwi-back-end.herokuapp.com/product/${id}`).then(c => {
+            swal({
+                title: "Success!",
+                text: "product removed successfully",
+                icon: "success"
+            });
+            getProducts();
+        })
     }
 
     return (
         <div id="pricipal" className={(mode) ? "darkmode" : "normal"} style={{ width: '100%' }}>
-            <Header/>
+            <Header />
 
             <div>
                 <div className="containerAdd">
                     <input type="checkbox" id="btn-mas" />
                     <div className="btn-mas">
-                        <Link to={`/products/${sellerData[0].id}/add`}> <label className="icon-mas2"><GrAdd style={{ width: '100%' }} /></label></Link>
+                        <Link to={`/products/${customerId}/add`}> <label className="icon-mas2"><GrAdd style={{ width: '100%' }} /></label></Link>
                     </div>
                 </div>
                 <div className="row" style={{ width: "100%", margin: '0', padding: '0' }}>
@@ -120,7 +166,7 @@ export default function Home2() {
                                     <img id="imgProfile" src={profile} alt="profileImg" />
                                     {(editSeller) ?
                                         <>
-                                            <form style={{ textAlign: 'left', margin: '20px', }}>
+                                            <form style={{ textAlign: 'left', margin: '20px', }} onSubmit={Save}>
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
                                                     <input type="text" class="form-control" value={name} id="name" placeholder="Full Name" onChange={(e) => setName(e.target.value)} />
@@ -131,11 +177,15 @@ export default function Home2() {
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name">Billing Address</label>
-                                                    <input type="text" class="form-control" id="phone" placeholder="Billing Address" />
+                                                    <input type="text" value={billing_address} class="form-control" id="billing_address" placeholder="Billing Address" onChange={(e) => setBilling_Address(e.target.value)} />
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="name">Shipping Address</label>
-                                                    <input type="text" class="form-control" id="phone" placeholder="Shipping Address" />
+                                                    <label for="shipping_address">Shipping Address</label>
+                                                    <input type="text" value={shipping_address} class="form-control" id="shipping_address" placeholder="Shipping Address" onChange={(e) => setShipping_Address(e.target.value)} />
+                                                </div>
+                                                <div className="btn-editSeller">
+                                                    <button className="btn save" type="submit" >Save</button>
+                                                    <button className="btn btn-danger" onClick={Cancel}>Cancel</button>
                                                 </div>
                                             </form>
                                         </>
@@ -153,17 +203,14 @@ export default function Home2() {
                             ))
                         }
                         {(editSeller) ?
-                            <div className="btn-editSeller">
-                                <button className="btn save" onClick={Save}>Save</button>
-                                <button className="btn btn-danger" onClick={Cancel}>Cancel</button>
-                            </div>
+                            ''
                             :
                             ''
                         }
 
 
                     </div>
-                    <div className="col-sm-11 col-md-8 col-lg-9" style={{overflow:'hidden',width:'100%'}}>
+                    <div className="col-sm-11 col-md-8 col-lg-9" style={{ overflow: 'hidden', width: '100%' }}>
                         <>
                             <p id="products">My Products List</p>
 
@@ -188,7 +235,7 @@ export default function Home2() {
                                                 <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.stock).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} /></td>
                                                 <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.price).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} prefix={'$ '} /></td>
                                                 <td style={{ textAlign: 'center' }}>
-                                                    <Link to={`/products/${sellerData[0].id}/${p.id}`} >
+                                                    <Link to={`/products/${customerId}/${p._id}`} >
                                                         <BiEdit />
                                                     </Link>
                                                     <a onClick={() => {
@@ -201,11 +248,9 @@ export default function Home2() {
                                                         })
                                                             .then((willDelete) => {
                                                                 if (willDelete) {
-                                                                    swal("Product has been deleted!", {
-                                                                        icon: "success",
-                                                                    });
+                                                                    deleteProduct(p._id);
                                                                 } else {
-                                                                    
+
                                                                 }
                                                             });
                                                     }}>
@@ -221,7 +266,7 @@ export default function Home2() {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }

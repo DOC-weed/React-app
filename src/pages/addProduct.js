@@ -4,13 +4,14 @@ import Footer from '../components/FooterComponent';
 import Header from '../components/HeaderComponent';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router';
 
 
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
 
 export default function ProveedorPage(props) {
-    const [customerId, setCustomerId] = React.useState("60f706cffffda620887dcc9e");
+    const [customerId, setCustomerId] = React.useState("60f788ed7d314a001584a20b");
     const [productCode, setProductCode] = React.useState('');
     const [name, setName] = React.useState('');
     const [price, setPrice] = React.useState(0);
@@ -18,18 +19,24 @@ export default function ProveedorPage(props) {
     const [thumbnail, setThumbnail] = React.useState('');
     const [image, setImage] = React.useState('');
     const [stock, setStock] = React.useState(0);
-    const [categories, setCategories] = React.useState([{ id: 1, name: 'Phone accessories', description: "Phone Accesories" }, { id: 2, name: 'Electronics', description: "Electronics E" }]);
+    const [categories, setCategories] = React.useState([]);
     const [category, setCategory] = React.useState({});
     const [fileUrl, setFileUrl] = React.useState('');
+    const [editar, setEditar] = React.useState(false);
 
+    let history = useHistory();
 
     useEffect(() => {
         getCategories();
+    }, []);
+
+    useEffect(() => {
         if (props.match.params.action != 'add') {
-            console.log('editar');
+            EditProduct(props.match.params.action);
+            setEditar(true);
         } else {
         }
-    }, []);
+    }, [category])
 
     async function getCategories() {
         await axios.get(`https://dwi-back-end.herokuapp.com/category`).then(c => {
@@ -64,12 +71,6 @@ export default function ProveedorPage(props) {
         }
     }
 
-    function handleThumbnail(e) {
-        const [file] = e.target.files;
-        setFileUrl(URL.createObjectURL(file))
-
-    }
-
     function ChangeCategory(e) {
         const { value } = e.target;
         setCategory(value)
@@ -77,6 +78,19 @@ export default function ProveedorPage(props) {
 
     function onFocus(event) {
         event.target.select();
+    }
+
+    async function EditProduct(id) {
+        await axios.get(`https://dwi-back-end.herokuapp.com/product/${id}`).then(p => {
+            for (const i of [p.data.productDB]) {
+                setProductCode(i.sku)
+                setName(i.name)
+                setDescription(i.description)
+                setPrice(i.price)
+                setStock(i.stock)
+                setCategory(i.category)
+            }
+        })
     }
 
     async function Save(event) {
@@ -90,23 +104,43 @@ export default function ProveedorPage(props) {
                 }
             }
         }
-        const obj = {
-            customer_id: customerId,
-            sku: productCode,
-            name: name,
-            price: price,
-            description: description,
-            stock: stock,
-            category: objcategory
+
+
+        if (!editar) {
+            const obj = {
+                customer_id: customerId,
+                sku: productCode,
+                name: name,
+                price: price,
+                description: description,
+                stock: stock,
+                category: objcategory
+            }
+            await axios.post(`https://dwi-back-end.herokuapp.com/product`, obj).then(p => {
+                swal({
+                    title: "Success!",
+                    text: "Product added successfully",
+                    icon: "success"
+                });
+                Clear();
+            })
+        } else {
+            const obj = {
+                sku: productCode,
+                name: name,
+                price: price,
+                description: description,
+                stock: stock,
+            }
+            await axios.put(`https://dwi-back-end.herokuapp.com/product/${props.match.params.action}`, obj).then(p => {
+                swal({
+                    title: "Success!",
+                    text: "product saved successfully",
+                    icon: "success"
+                });
+                history.push('/seller/profile');
+            })
         }
-        await axios.post(`https://dwi-back-end.herokuapp.com/product`, obj).then(p => {
-            swal({
-                title: "Success!",
-                text: "Product added successfully",
-                icon: "success"
-            });
-            Clear();
-        })
     }
 
     function Clear() {
@@ -120,7 +154,7 @@ export default function ProveedorPage(props) {
 
     return (
         <div style={{ width: '100%' }}>
-        <Header/>
+            <Header />
             <div className="row" id="containerProduct">
                 <div className="col-sm-12 col-md-12 col-lg-9" style={{ width: '100%', margin: 'auto' }}>
                     <form className="form_containerProducto" onSubmit={Save}>
@@ -128,11 +162,11 @@ export default function ProveedorPage(props) {
                             <div className="row">
                                 <div className="col-sm-12 col-md-3 col-lg-3" onFocus={onFocus}>
                                     <label for="name">Product code: </label>
-                                    <input type="text" required onFocus={onFocus} class="form-control" id="code" placeholder="Product code..." onChange={(e) => setProductCode(e.target.value)} value={productCode}/>
+                                    <input type="text" required onFocus={onFocus} class="form-control" id="code" placeholder="Product code..." onChange={(e) => setProductCode(e.target.value)} value={productCode} />
                                 </div>
                                 <div className="col-sm-12 col-md-9 col-lg-9">
                                     <label for="name">Product name: </label>
-                                    <input type="text" required onFocus={onFocus} class="form-control" id="name" placeholder="Enter product name..." onChange={(e) => setName(e.target.value)} value={name}/>
+                                    <input type="text" required onFocus={onFocus} class="form-control" id="name" placeholder="Enter product name..." onChange={(e) => setName(e.target.value)} value={name} />
                                 </div>
                             </div>
                         </div>
@@ -159,6 +193,7 @@ export default function ProveedorPage(props) {
                                 <div className="col-sm-12 col-md-6 col-lg-6">
                                     <label for="select">Categories: </label>
                                     <select class="form-control" aria-label="Default select example" value={category} required onChange={ChangeCategory}>
+                                        <option value="">Choose a category...</option>
                                         {
                                             categories.map(c => (
                                                 <option key={c._id} value={c._id}>{c.name}</option>
