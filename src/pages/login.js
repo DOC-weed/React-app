@@ -19,9 +19,11 @@ export default function Login() {
     const [show, setShow]=React.useState(false);
     const [loggedIn, setLoggedIn] = React.useState(false);
     const url ='https://dwi-back-end.herokuapp.com/';
+   
+    
 
     let history = useHistory();
-
+    
     async function submitformBuyer() {
 
         if((email === '' && pass ==='')||(email ===''||pass==='')){
@@ -142,9 +144,7 @@ export default function Login() {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Example@email.com"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)} />
+                        <Form.Control type='email' placeholder='Example@email.com' value={email} onChange={e => setEmail(e.target.value)} /> 
                             
                     </Form.Group>
 
@@ -170,6 +170,7 @@ export default function Login() {
             </div>
 
         </div>
+        
         </>
     )
 

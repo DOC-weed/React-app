@@ -9,6 +9,9 @@ import Us from './pages/us';
 import Mision from './pages/mision';
 import Vision from './pages/vision';
 import Register from './pages/registerUser';
+import Checkout from './pages/checkout';
+import Cart from './pages/cart';
+import Product from './pages/product';
 
 import {BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
 
@@ -37,6 +40,13 @@ function App() {
        </Route>
        <Route path="/home" exact={true} >
          <Home/>
+       </Route>
+       <Route path="/product/:id" component={Product} exact={true} />
+       <Route path="/checkout" exact={true} >
+       <Checkout/> 
+       </Route>
+       <Route path="/cart" exact={true} >
+       <Cart/> 
        </Route>
        <Route path="/" exact={true} >
        <Home/> 

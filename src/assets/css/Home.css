@@ -44,6 +44,11 @@
     height: 500px;
 }
 
+.container_1_home h3,
+.container_1_home p {
+    color: #36393B;
+}
+
 .img-slider {
     height: 500px;
     object-fit: cover;
