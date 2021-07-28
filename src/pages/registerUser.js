@@ -106,6 +106,13 @@ export default function RegisterUSer() {
 
         
         
+      }else{
+        swal({
+          title: "Ouups!",
+          text: "The password must contain at least one numeric digit, one uppercase letter, one lowercase letter, one special character and between 6 to 20 characters.",
+          icon: "error"
+        });
+
       }
       
     }

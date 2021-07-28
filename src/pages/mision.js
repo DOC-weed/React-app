@@ -9,7 +9,7 @@ render() {
         <>
         <Header/>
         <h2>Mision page</h2>
-        <Footer/>
+
         </>
     );
 }

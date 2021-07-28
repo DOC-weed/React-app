@@ -8,6 +8,7 @@ import slider1 from '../assets/images/banner.jpeg';
 import placehold from '../assets/images/placeholder.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 /*import lenguajes from '../assets/images/lenguajes.png';*/
@@ -20,7 +21,55 @@ export default function Home(){
 
     const [products , setproducts] = React.useState([]);
     const url ='https://dwi-back-end.herokuapp.com/';
+    let accesToken = localStorage.getItem('token');
     
+    
+  async function add_to(id){
+    if(accesToken === '' || accesToken === null){
+      swal({
+          title: "I don't know",
+          text: "You must log in to see your cart",
+          icon: "info"
+
+      });
+  }else{
+    swal({
+      title: "One less thing to do",
+      text: "added product",
+      icon: "success"
+    });
+    await axios.get(url+'product/'+id).then(data=>{
+      let arrayP = [];
+      let product = data.data.productDB;
+      let cart = localStorage.getItem('cart');
+      if(cart === null){
+        arrayP.push(product);
+        localStorage.setItem('cart',JSON.stringify(arrayP));
+        
+        
+      }else{
+        let cart2 = localStorage.getItem('cart');
+        arrayP = JSON.parse(cart2);
+        console.log(arrayP);
+        let test = Array.isArray(arrayP);
+        let i = arrayP.length;
+        arrayP.push(product);
+        console.log(test);
+        console.log(arrayP);
+        //arrayP.push(JSON.parse(product));
+        //localStorage.setItem('cart',JSON.stringify(arrayP));
+        //localStorage.getItem('cart')
+        
+
+      }
+      
+    }).catch(err =>{
+      console.log(err);
+    });
+
+
+  }
+  }
 
     function NumberList(props) {
       const numbers = props.numbers;
@@ -31,7 +80,7 @@ export default function Home(){
           <Link to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
           <p className="card-text">{number.description}</p>
           <p className="card-text">${number.price}</p>
-          <button className="btn btn-warning ">Add to cart</button>
+          <button className="btn btn-warning" onClick={() => add_to(number._id)}>Add to cart</button>
         </div>
       </div>
       );
@@ -93,11 +142,12 @@ export default function Home(){
         </Carousel.Item>
       </Carousel>
     </div>
+
     <div className="container_2_home">
       <div className="childrenone">
         <h2>OFFERS</h2>
         <div className="card">
-          <img src="..." className="card-img-top" alt="..."/>
+          <img src={placehold} className="card-img-top" alt="..."/>
           <div className="card-body">
             <h5 className="card-title">Product</h5>
             <p className="card-text">Description short about the product</p>
@@ -105,7 +155,7 @@ export default function Home(){
           </div>
         </div>
         <div className="card">
-        <img src="..." className="card-img-top" alt="..."/>
+        <img src={placehold} className="card-img-top" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">Product</h5>
           <p className="card-text">Description short about the product</p>
@@ -113,7 +163,7 @@ export default function Home(){
         </div>
       </div>
       <div className="card">
-        <img src="..." className="card-img-top" alt="..."/>
+        <img src={placehold} className="card-img-top" alt="..."/>
         <div className="card-body">
           <h5 className="card-title">Product</h5>
           <p className="card-text">Description short about the product</p>

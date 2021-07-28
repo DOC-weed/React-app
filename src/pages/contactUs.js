@@ -9,7 +9,7 @@ render() {
         <>
         <Header/>
         <h2>Contac us page</h2>
-        <Footer/>
+
         </>
         
 

@@ -21,11 +21,13 @@ export default function Header() {
 
     const [checkCustomer, setcheck] = React.useState(false);
     const [customer, setCustomer] = React.useState({});
+  
 
     const url ='https://dwi-back-end.herokuapp.com/';
     const history = useHistory();
     let accesToken = localStorage.getItem('token');
     let id = localStorage.getItem('_id');
+    let wallet = localStorage.getItem('wallet');
 
 
     useEffect(async () => {
@@ -36,6 +38,7 @@ export default function Header() {
             await axios.get(url + 'customer/' + id).then((res) => {
                 setCustomer(res.data.customerDB);
                 console.log(res.data.customerDB);
+                localStorage.setItem('customer_id',res.data.customerDB.customer_seller);
                 setcheck(true);
                 
             }).catch(err => {
@@ -46,14 +49,16 @@ export default function Header() {
                     icon: "info"
                 });
             });
+            
+            
         }
 
     }, []);
     function logOut(){
         localStorage.clear();
         history.push('/login');
-
     }
+    
     function goToCart(){
         if(accesToken === '' || accesToken === null){
             swal({
@@ -67,6 +72,19 @@ export default function Header() {
             
         }
     }
+    async function getwallet(){
+        let id = localStorage.getItem('customer_id');
+        await axios.get(url +'customer-seller/'+id).then(res => {
+            localStorage.setItem('wallet',res.data.customerSellerDB.wallet);
+        }).catch(err => {
+            console.log(err);
+        })   
+        
+    }
+   getwallet();
+    
+    
+    
     
 
 
@@ -81,16 +99,13 @@ export default function Header() {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end primary-navbar">
-                <Form inline className="" >
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2 " />
-                    <Button className="" variant="secondary"><span className=""><GrFormSearch/></span></Button>
-                </Form>
+                
                 <Nav className="justify-content-end nav_bar" > 
                     {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
                     {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-2 span">Sign in</span></Nav.Link>:""}
-                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span class="badge bg-secondary">0</span></span></Nav.Link>
+                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span class="badge bg-secondary"></span></span></Nav.Link>
                     {(customer.customer_type === 'seller') ?
-                        <Nav.Link style={{ color: 'white' }} className=" navegacion"><span className="badge bg-custom-2 span">Wallet <span class="badge bg-secondary">$42</span></span></Nav.Link> : ""}
+                        <Nav.Link style={{ color: 'white' }} className=" navegacion"><span className="badge bg-custom-2 span">Wallet <span class="badge bg-secondary">${wallet}</span></span></Nav.Link> : ""}
                     {(customer.customer_type ==='seller')?<Nav.Link href="/seller/profile" style={{ color: 'white' }} className="navegacion"><span className="badge bg-warning span" >Dashboard</span></Nav.Link> : ""}   
                     {(checkCustomer) ? <Nav.Link onClick={logOut} className="navegacion" ><span className="badge bg-danger span"><GrLogout/></span></Nav.Link> : ""}
                 </Nav>
