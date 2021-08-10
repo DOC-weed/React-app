@@ -15,8 +15,9 @@ import NumberFormat from 'react-number-format';
 import axios from 'axios';
 
 export default function Home2() {
-    const [customerId, setCustomerId] = React.useState("60f788ed7d314a001584a20b");
+    const [customerId, setCustomerId] = React.useState(localStorage.getItem('_id'));
     const [sellerData, setSellerData] = React.useState([]);
+    
     const [products, setProducts] = React.useState([]);
 
     const [name, setName] = React.useState('');
@@ -68,6 +69,7 @@ export default function Home2() {
                     arr.push(obj);
                 }
                 setProducts(arr)
+                
             })
         })
     }
@@ -138,7 +140,7 @@ export default function Home2() {
 
     return (
         <div id="pricipal" className={(mode) ? "darkmode" : "normal"} style={{ width: '100%' }}>
-            <Header />
+            <Header/>
 
             <div>
                 <div className="containerAdd">
@@ -210,12 +212,13 @@ export default function Home2() {
 
 
                     </div>
-                    <div className="col-sm-11 col-md-8 col-lg-9" style={{ overflow: 'hidden', width: '100%' }}>
+                    <div className="col-sm-11 col-md-8 col-lg-9" style={{ width: '100%', height: '100vh' }}>
                         <>
                             <p id="products">My Products List</p>
 
                             {<input type="text" id="myInput" onKeyUp={myFunction} placeholder="Search for product name..." />}
 
+                            <div style={{ overflowY: 'scroll', display: 'flex', height: '80%' }}>
                             <table id="myTable">
                                 <thead className="header">
                                     <tr>
@@ -262,6 +265,7 @@ export default function Home2() {
                                     }
                                 </tbody>
                             </table>
+                            </div>
                         </>
                     </div>
                 </div>

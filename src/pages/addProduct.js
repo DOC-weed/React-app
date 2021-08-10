@@ -11,7 +11,7 @@ import NumberFormat from 'react-number-format';
 import axios from 'axios';
 
 export default function ProveedorPage(props) {
-    const [customerId, setCustomerId] = React.useState("60f788ed7d314a001584a20b");
+    const [customerId, setCustomerId] = React.useState(localStorage.getItem('_id'));
     const [productCode, setProductCode] = React.useState('');
     const [name, setName] = React.useState('');
     const [price, setPrice] = React.useState(0);
@@ -200,18 +200,6 @@ export default function ProveedorPage(props) {
                                             ))
                                         }
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div className="row">
-                                <div className="col-sm-12 col-md-6 col-lg-6">
-                                    <label for="thumbnail">Thumbnail: </label>
-                                    <input className="form-control" type="file" accept="images/*" id="thumbnail" />
-                                </div>
-                                <div className="col-sm-12 col-md-6 col-lg-6">
-                                    <label for="images">Images: </label>
-                                    <input className="form-control" type="file" accept="images/*" id="images" />
                                 </div>
                             </div>
                         </div>

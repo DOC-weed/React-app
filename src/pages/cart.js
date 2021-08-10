@@ -12,6 +12,7 @@ export default function Cart(){
     const [data,setdata]= React.useState([]);
     let cart =JSON.parse(localStorage.getItem('cart'));
     let history = useHistory();
+    let newValue = 0;
     
     useEffect(()=>{
         
@@ -44,6 +45,10 @@ export default function Cart(){
           });
         
     }
+    function changeValues(index, value){
+
+    }
+
     function CartList(props) {
         const cart = props.carts;
         const listItems = cart.map((item, index) =>
@@ -57,7 +62,7 @@ export default function Cart(){
             </div>
             <div className="cart_list_quantity">
                 <p>$ {item.price}</p>
-                <input type="number" value={item.quantity} />
+                <input type="number" value={item.quantity} onChange={()=>changeValues(index, item.quantity)} />
             </div>
             <div className="cart_list_button px-3">
                 <button className="btn btn-danger" onClick={()=>deleteItem(index)}><MdDelete /></button>
