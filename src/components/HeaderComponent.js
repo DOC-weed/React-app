@@ -101,6 +101,7 @@ export default function Header() {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end primary-navbar">
                 
                 <Nav className="justify-content-end nav_bar" > 
+                    {(checkCustomer) ? <Nav.Link href="/orders" className="navegacion" ><span className="badge bg-custom-2 span">Orders</span></Nav.Link> : ""}
                     {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
                     {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-2 span">Sign in</span></Nav.Link>:""}
                     <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span class="badge bg-secondary"></span></span></Nav.Link>

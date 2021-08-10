@@ -12,6 +12,8 @@ import Register from './pages/registerUser';
 import Checkout from './pages/checkout';
 import Cart from './pages/cart';
 import Product from './pages/product';
+import Order from './pages/orders';
+
 
 import {BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
 
@@ -42,9 +44,9 @@ function App() {
          <Home/>
        </Route>
        <Route path="/product/:id" component={Product} exact={true} />
-       <Route path="/checkout" exact={true} >
-       <Checkout/> 
-       </Route>
+       <Route path="/checkout"component={Checkout} exact={true}/> 
+       <Route path="/orders" component={Order} exact={true}/>
+       
        <Route path="/cart" exact={true} >
        <Cart/> 
        </Route>
@@ -55,6 +57,7 @@ function App() {
        <Route path="/products/:proveedor/:action" component={AddProduct} exact={true}/>
      </Switch>
    </Router>
+   
   );
 }
 

@@ -24,7 +24,7 @@ export default function Home(){
     let accesToken = localStorage.getItem('token');
     
     
-  async function add_to(id){
+  async function add_to(_name, _desc, _price){
     if(accesToken === '' || accesToken === null){
       swal({
           title: "I don't know",
@@ -33,17 +33,18 @@ export default function Home(){
 
       });
   }else{
-    swal({
-      title: "One less thing to do",
-      text: "added product",
-      icon: "success"
-    });
-    await axios.get(url+'product/'+id).then(data=>{
+    
+      let obj ={
+        name:_name,
+        description:_desc,
+        price:_price,
+        quantity:1
+      }
       let arrayP = [];
-      let product = data.data.productDB;
       let cart = localStorage.getItem('cart');
+      console.log(cart,'carro actual');
       if(cart === null){
-        arrayP.push(product);
+        arrayP.push(obj);
         localStorage.setItem('cart',JSON.stringify(arrayP));
         
         
@@ -52,22 +53,18 @@ export default function Home(){
         arrayP = JSON.parse(cart2);
         console.log(arrayP);
         let test = Array.isArray(arrayP);
-        let i = arrayP.length;
-        arrayP.push(product);
+        arrayP.push(obj);
         console.log(test);
         console.log(arrayP);
-        //arrayP.push(JSON.parse(product));
-        //localStorage.setItem('cart',JSON.stringify(arrayP));
-        //localStorage.getItem('cart')
+        localStorage.setItem('cart',JSON.stringify(arrayP));
         
 
       }
-      
-    }).catch(err =>{
-      console.log(err);
-    });
-
-
+      swal({
+        title: "One less thing to do",
+        text: "added product",
+        icon: "success"
+      });
   }
   }
 
@@ -80,7 +77,7 @@ export default function Home(){
           <Link to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
           <p className="card-text">{number.description}</p>
           <p className="card-text">${number.price}</p>
-          <button className="btn btn-warning" onClick={() => add_to(number._id)}>Add to cart</button>
+          <button className="btn btn-warning" onClick={() => add_to(number.name,number.description,number.price)}>Add to cart</button>
         </div>
       </div>
       );
