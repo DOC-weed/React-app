@@ -3,7 +3,7 @@ import Login from './pages/login';
 import Home from './pages/Home';
 import Home2 from './pages/Home2';
 import AddProduct from './pages/addProduct';
-import HeaderComponent from './components/HeaderComponent';
+
 import ContactUs from './pages/contactUs';
 import Us from './pages/us';
 import Mision from './pages/mision';
@@ -15,7 +15,7 @@ import Product from './pages/product';
 import Order from './pages/orders';
 
 
-import {BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 
 function App() {
   

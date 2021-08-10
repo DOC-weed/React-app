@@ -3,15 +3,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from '../assets/images/logo.png'
 import '../assets/css/HeaderComponent.css';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+
 import { useHistory } from 'react-router';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { GrCart } from 'react-icons/gr';
 import { GrLogout } from 'react-icons/gr';
-import { GrFormSearch } from 'react-icons/gr';
+
 
 
 
@@ -30,25 +28,30 @@ export default function Header() {
     let wallet = localStorage.getItem('wallet');
 
 
-    useEffect(async () => {
+    useEffect( () => {
         if (accesToken === '' || accesToken === null) {
             console.log('no hay token');
         } else {
-
-            await axios.get(url + 'customer/' + id).then((res) => {
-                setCustomer(res.data.customerDB);
-                console.log(res.data.customerDB);
-                localStorage.setItem('customer_id',res.data.customerDB.customer_seller);
-                setcheck(true);
-                
-            }).catch(err => {
-                console.log(err);
-                swal({
-                    title: "Ouups!",
-                    text: "There was a problem with your session, please log out and log in again",
-                    icon: "info"
+            async function data(){
+                await axios.get(url + 'customer/' + id).then((res) => {
+                    setCustomer(res.data.customerDB);
+                    console.log(res.data.customerDB);
+                    localStorage.setItem('customer_id',res.data.customerDB.customer_seller);
+                    setcheck(true);
+                    
+                }).catch(err => {
+                    console.log(err);
+                    swal({
+                        title: "Ouups!",
+                        text: "There was a problem with your session, please log out and log in again",
+                        icon: "info"
+                    });
                 });
-            });
+
+            }
+            data();
+
+           
             
             
         }
@@ -104,9 +107,9 @@ export default function Header() {
                     {(checkCustomer) ? <Nav.Link href="/orders" className="navegacion" ><span className="badge bg-custom-2 span">Orders</span></Nav.Link> : ""}
                     {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
                     {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-2 span">Sign in</span></Nav.Link>:""}
-                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span class="badge bg-secondary"></span></span></Nav.Link>
+                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span className="badge bg-secondary"></span></span></Nav.Link>
                     {(customer.customer_type === 'seller') ?
-                        <Nav.Link style={{ color: 'white' }} className=" navegacion"><span className="badge bg-custom-2 span">Wallet <span class="badge bg-secondary">${wallet}</span></span></Nav.Link> : ""}
+                        "": ""}
                     {(customer.customer_type ==='seller')?<Nav.Link href="/seller/profile" style={{ color: 'white' }} className="navegacion"><span className="badge bg-warning span" >Dashboard</span></Nav.Link> : ""}   
                     {(checkCustomer) ? <Nav.Link onClick={logOut} className="navegacion" ><span className="badge bg-danger span"><GrLogout/></span></Nav.Link> : ""}
                 </Nav>

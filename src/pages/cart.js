@@ -46,7 +46,7 @@ export default function Cart(){
         
     }
     function changeValues(index, value){
-
+        
     }
 
     function CartList(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/FooterComponent.css';
-import logo from '../assets/images/logo.png';
+
 import kawaii from '../assets/images/kawaii.png'
 
 class FooterComponent extends React.Component {
@@ -8,7 +8,7 @@ class FooterComponent extends React.Component {
         return ( 
             <div className="container_footer">
                 <div className="kawaii-container">
-                    <img src={kawaii} />
+                    <img src={kawaii} alt='logokawai'/>
                 </div>
                 
                 <div className="text-container">

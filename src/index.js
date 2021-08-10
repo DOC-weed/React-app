@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import HeaderComponent from './components/HeaderComponent';
+
 import FooterComponent from './components/FooterComponent';
-import Home from './pages/Home';
+
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './pages/login';
+
 
 ReactDOM.render(
 
