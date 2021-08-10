@@ -47,9 +47,7 @@ function App() {
        <Route path="/checkout"component={Checkout} exact={true}/> 
        <Route path="/orders" component={Order} exact={true}/>
        
-       <Route path="/cart" exact={true} >
-       <Cart/> 
-       </Route>
+       <Route path="/cart" exact={true} component={Cart}/>
        <Route path="/" exact={true} >
        <Home/> 
        </Route>
