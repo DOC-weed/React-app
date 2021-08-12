@@ -80,9 +80,9 @@ class Cart extends Component {
     }
 
     createState(data) {
-        if(data == undefined || data == null || data == ''{
+        if(data == undefined || data == null || data == ''){
             data = [];
-        });
+        }
         data.map((i, index) =>
             this.setState(prevState => ({
                 items: prevState.items.set('item' + index, i.quantity)
