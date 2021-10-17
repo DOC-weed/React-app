@@ -120,19 +120,19 @@ export default function Login() {
                     <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Example@email.com"
+                        <Form.Control type="email" name="emailBuyer" placeholder="Example@email.com"
                             value={email}
                             onChange={e => setEmail(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password"
+                        <Form.Control type="password" name="passBuyer" placeholder="Password"
                             value={pass}
                             onChange={e => setPass(e.target.value)} />
                     </Form.Group>
 
-                    <Button variant="buyer" type="button"
+                    <Button variant="buyer" name="buttonBuyer" type="button"
                     onClick={submitformBuyer}>
                         Sign in
                     </Button>
@@ -144,18 +144,18 @@ export default function Login() {
                 <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type='email' placeholder='Example@email.com' value={email} onChange={e => setEmail(e.target.value)} /> 
+                        <Form.Control type='email' name="emailSeller" placeholder='Example@email.com' value={email} onChange={e => setEmail(e.target.value)} /> 
                             
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password"
+                        <Form.Control type="password" name="passSeller" placeholder="Password"
                             value={pass}
                             onChange={e => setPass(e.target.value)} />
                     </Form.Group>
 
-                    <Button variant="seller" type="button"
+                    <Button variant="seller" name="buttonSeller" type="button"
                         onClick={submitformSeller}>
                         Sign in
                     </Button>
