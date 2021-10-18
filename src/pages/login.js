@@ -111,8 +111,8 @@ export default function Login() {
             <div className="container_login_2">
                 <div className="login_1_header">
                     <div className="login_group_buttons">
-                        <button className={(show)?"btn_1 active":"btn_1"} onClick={e =>setShow(true)}>Seller</button>
-                        <button className={(!show)?"btn_2 active":"btn_2"} onClick={e => setShow(false)}>Buyer</button>
+                        <button className={(show)?"btn_1 active":"btn_1"} name="Seller" onClick={e =>setShow(true)}>Seller</button>
+                        <button className={(!show)?"btn_2 active":"btn_2"} name="Buyer" onClick={e => setShow(false)}>Buyer</button>
                     </div>
                 </div>
                 {(!show)?<div className="form">
