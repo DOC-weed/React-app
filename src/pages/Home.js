@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           <div className="childrentwo">
             <div>
-              <input type="text" id="myInput" onChange={Search} placeholder="Search products..." />
+              <input type="text" id="myInput" name="search" onChange={Search} placeholder="Search products..." />
             </div>
             <NumberList numbers={products} />
 
