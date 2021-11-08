@@ -95,7 +95,7 @@ export default function Header() {
 
     return (
          <div className="" >
-             <Navbar className="fondo" scrolling dark expand="lg" >
+             <Navbar className="fondo" scrolling expand="lg" >
 
             <Navbar.Brand href="/home">
                 <img className="pagina" src={logo} alt="" />
@@ -104,14 +104,14 @@ export default function Header() {
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end primary-navbar">
                 
                 <Nav className="justify-content-end nav_bar" > 
-                    {(checkCustomer) ? <Nav.Link href="/orders" className="navegacion" ><span className="badge bg-custom-2 span">Orders</span></Nav.Link> : ""}
-                    {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-1 span">Sign up</span></Nav.Link>:""}
-                    {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-2 span">Sign in</span></Nav.Link>:""}
-                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-1 span "><GrCart/> <span className="badge bg-secondary"></span></span></Nav.Link>
+                    {(checkCustomer) ? <Nav.Link href="/orders" className="navegacion" ><span className="badge bg-custom-3 span">Orders</span></Nav.Link> : ""}
+                    {(!checkCustomer)?<Nav.Link href="/register" className="navegacion" ><span className="badge bg-custom-3 span">Sign up</span></Nav.Link>:""}
+                    {(!checkCustomer)?<Nav.Link href="/login" className="navegacion" ><span className="badge bg-custom-3 span">Sign in</span></Nav.Link>:""}
+                    <Nav.Link style={{ color: 'white' }} onClick={goToCart} className="navegacion"><span className="badge bg-custom-3 span "><GrCart/> <span className="badge bg-secondary"></span></span></Nav.Link>
                     {(customer.customer_type === 'seller') ?
                         "": ""}
-                    {(customer.customer_type ==='seller')?<Nav.Link href="/seller/profile" style={{ color: 'white' }} className="navegacion"><span className="badge bg-warning span" >Dashboard</span></Nav.Link> : ""}   
-                    {(checkCustomer) ? <Nav.Link onClick={logOut} className="navegacion" ><span className="badge bg-danger span"><GrLogout/></span></Nav.Link> : ""}
+                    {(customer.customer_type ==='seller')?<Nav.Link href="/seller/profile" style={{ color: 'white' }} className="navegacion"><span className="badge bg-custom-3 span" >Dashboard</span></Nav.Link> : ""}   
+                    {(checkCustomer) ? <Nav.Link onClick={logOut} className="navegacion" ><span className="badge bg-danger logout-btn span"><GrLogout /></span></Nav.Link> : ""}
                 </Nav>
 
             </Navbar.Collapse>

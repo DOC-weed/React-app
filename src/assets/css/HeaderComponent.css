@@ -7,24 +7,26 @@
 }
 
 .bg-custom-1 {
-    background-color: #A5D8FF;
-    border-color: #A5D8FF;
+    background-color: #E1D516;
+    border-color: #E1D516;
 }
 
 .bg-custom-2 {
-    background-color: #C49799;
-    border-color: #C49799;
+    background-color: #E1D516;
+    border-color: #E1D516;
 }
 
 .bg-custom-3 {
-    background-color: #AFD0D6!important;
-    border-color: #AFD0D6!important;
-    color: #333;
+    background-color: #16A0C7!important;
+    border-color: #16A0C7!important;
+    color: white;
 }
-
+.logout-btn{
+    border:1px solid #fff;
+}
 .bg-custom-3 a {
     text-decoration: none;
-    color: #333;
+    color: white;
 }
 
 .hide {
@@ -45,7 +47,7 @@
 }
 
 .fondo {
-    background-color: rgba(0, 0, 0, 0.425);
+    background-color:   #FE6721;
     width: 100%;
 }
 

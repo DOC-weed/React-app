@@ -93,7 +93,7 @@ export default function Product(props){
             <Head/>
             <div className="product_father p-2 my-5">
                 <div className="container_head">
-                   <Link to="/home"> <button className="btn btn-primary">Back to store</button></Link>
+                   <Link to="/home"> <button className="btn btn-primary bg-cust">Back to store</button></Link>
                    <button className="btn bg-cust" onClick={goToCart}>View cart</button>
                 </div> 
             <div className="product_container py-5">

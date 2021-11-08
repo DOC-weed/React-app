@@ -1,5 +1,6 @@
 .father {
     width: 100%;
+    background-color: #877D85;
 }
 
 .childrenone img {
@@ -8,13 +9,17 @@
 }
 
 .btn-primary {
-    background-color: #A5D8FF!important;
-    border-color: #A5D8FF!important;
+    background-color: #E1D516!important;
+    border-color: #E1D516!important;
 }
 
 .childrenone h2 {
     text-align: center;
     padding: 3%;
+}
+.link_{
+    color:#16A0C7!important;
+    text-decoration: none;
 }
 
 .container_2_home {
@@ -24,7 +29,7 @@
 
 .childrenone {
     width: 20%;
-    background-color: #AFD0D6;
+
     padding: 10px;
 }
 
@@ -46,14 +51,16 @@
 
 .container_1_home h3,
 .container_1_home p {
-    color: #36393B;
+    color: black!important;
 }
 
 .img-slider {
     height: 500px;
     object-fit: cover;
 }
-
+.aligns-products{
+    text-align: center;
+}
 .products {
     display: block;
 }

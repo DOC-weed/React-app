@@ -5,6 +5,9 @@ import Button from 'react-bootstrap/Button'
 import HeaderComponent from '../components/HeaderComponent';
 import Footer from '../components/FooterComponent';
 import slider1 from '../assets/images/banner.jpeg';
+import promo2 from '../assets/images/promo2.jpeg';
+import promo3 from '../assets/images/promo3.jpeg';
+import promo1 from '../assets/images/promo1.png';
 import placehold from '../assets/images/placeholder.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -75,8 +78,8 @@ export default function Home() {
     const listItems = numbers.map((number) =>
       <div className="card">
         <img src={placehold} className="card-img-top" alt="..." />
-        <div className="card-body">
-          <Link to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
+        <div className="card-body aligns-products" >
+          <Link className="link_" to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
           <p className="card-text">{number.description}</p>
           <p className="card-text">${number.price}</p>
           <button className="btn btn-warning" onClick={() => add_to(number.name,number.description,number.price)}>Add to cart</button>
@@ -126,7 +129,7 @@ export default function Home() {
             <Carousel.Item>
               <img
                 className="d-block w-100 img-slider "
-                src={slider1}
+                src={promo2}
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -134,35 +137,12 @@ export default function Home() {
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
               </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100 img-slider"
-                src={slider1}
-                alt="Second slide"
-              />
-
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className="d-block w-100 img-slider"
-                src={slider1}
-                alt="Third slide"
-              />
-
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
+           
           </Carousel>
         </div>
 
         <div className="container_2_home">
-          <div className="childrenone">
+          <div className="childrenone bg-warning">
             <h2>OFFERS</h2>
             <div className="card">
               <img src={placehold} className="card-img-top" alt="..." />

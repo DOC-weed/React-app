@@ -15,7 +15,7 @@
 .container_login_1 {
     width: 400px;
     text-align: center;
-    background-color: #A5D8FF;
+    background-color: #FE6721;
     border-radius: 5px 0 0 5px;
 }
 
@@ -37,14 +37,14 @@
 }
 
 .btn_1 {
-    background-color: #A5D8FF;
+    background-color: #FE6721;
     border: 0px;
     padding: 5px;
     border-radius: 5px 0 0 5px;
 }
 
 .btn_2 {
-    background-color: #BFB6BB;
+    background-color: #FE6721;
     border: 0px;
     padding: 5px;
     border-radius: 0 5px 5px 0;
@@ -65,17 +65,17 @@
 }
 
 .btn-buyer {
-    background-color: #BFB6BB!important;
+    background-color: #FE6721!important;
     color: white!important;
 }
 
 .btn-seller {
-    background-color: #A5D8FF!important;
+    background-color: #FE6721!important;
     color: white!important;
 }
 
 .active {
-    background-color: #AFD0D6;
+    background-color: #E1D516;
     border: 1px solid #fff;
 }
 
