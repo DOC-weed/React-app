@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
 import '../assets/css/addProduct.css';
 import Footer from '../components/FooterComponent';
 import Header from '../components/HeaderComponent';
-import { Link } from 'react-router-dom';
+import {
+    Link
+} from 'react-router-dom';
 import swal from 'sweetalert';
-import { useHistory } from 'react-router';
-
+import {
+    useHistory
+} from 'react-router';
+import {
+    storage
+} from '../firebase';
 
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
@@ -17,7 +26,8 @@ export default function ProveedorPage(props) {
     const [price, setPrice] = React.useState(0);
     const [description, setDescription] = React.useState('');
     const [thumbnail, setThumbnail] = React.useState('');
-    const [image, setImage] = React.useState('');
+    const [image, setImage] = React.useState({});
+    const [image2, setImage2] = React.useState('');
     const [stock, setStock] = React.useState(0);
     const [categories, setCategories] = React.useState([]);
     const [category, setCategory] = React.useState({});
@@ -34,8 +44,8 @@ export default function ProveedorPage(props) {
         if (props.match.params.action != 'add') {
             EditProduct(props.match.params.action);
             setEditar(true);
-        } else {
-        }
+        } else {}
+        
     }, [category])
 
     async function getCategories() {
@@ -45,19 +55,26 @@ export default function ProveedorPage(props) {
     }
 
     function setPriceValue(values) {
-        const { value } = values;
+        const {
+            value
+        } = values;
 
         setPrice(value);
     }
 
     function setStockValue(values) {
-        const { value } = values;
+        const {
+            value
+        } = values;
 
         setStock(value);
     }
 
     function handleBlur(e) {
-        const { name, value } = e.target;
+        const {
+            name,
+            value
+        } = e.target;
         let newValue;
 
         if (name == 'price') {
@@ -72,8 +89,24 @@ export default function ProveedorPage(props) {
     }
 
     function ChangeCategory(e) {
-        const { value } = e.target;
+        const {
+            value
+        } = e.target;
         setCategory(value)
+
+    }
+    async function ChangeImage(e){
+        const img = e.target.files[0]
+        await storage.ref('IMAGES/'+customerId+'/'+name).put(img).then((res)=>{
+            res.ref.getDownloadURL().then((downloadURL) => {
+                setImage2(downloadURL);
+                
+            });
+        }).catch((err)=>{
+            console.log(err);
+        })
+        
+        console.log(img);
     }
 
     function onFocus(event) {
@@ -82,7 +115,7 @@ export default function ProveedorPage(props) {
 
     async function EditProduct(id) {
         await axios.get(`https://dwi-back-end.herokuapp.com/product/${id}`).then(p => {
-            for (const i of [p.data.productDB]) {
+            for (const i of[p.data.productDB]) {
                 setProductCode(i.sku)
                 setName(i.name)
                 setDescription(i.description)
@@ -96,6 +129,8 @@ export default function ProveedorPage(props) {
     async function Save(event) {
         event.preventDefault();
         let objcategory = {};
+        
+        console.log(image2)
         for (const c of categories) {
             if (category == c._id) {
                 objcategory = {
@@ -104,7 +139,7 @@ export default function ProveedorPage(props) {
                 }
             }
         }
-
+        
 
         if (!editar) {
             const obj = {
@@ -114,8 +149,10 @@ export default function ProveedorPage(props) {
                 price: price,
                 description: description,
                 stock: stock,
-                category: objcategory
+                category: objcategory,
+                image:image2
             }
+            
             await axios.post(`https://dwi-back-end.herokuapp.com/product`, obj).then(p => {
                 swal({
                     title: "Success!",
@@ -131,6 +168,7 @@ export default function ProveedorPage(props) {
                 price: price,
                 description: description,
                 stock: stock,
+                image:image2
             }
             await axios.put(`https://dwi-back-end.herokuapp.com/product/${props.match.params.action}`, obj).then(p => {
                 swal({
@@ -152,7 +190,7 @@ export default function ProveedorPage(props) {
         setCategory('')
     }
 
-    return (
+    return ( 
         <div style={{ width: '100%' }}>
             <Header />
             <div className="row" id="containerProduct">
@@ -189,6 +227,8 @@ export default function ProveedorPage(props) {
                         <div class="form-group">
                             <div className="row">
                                 <div className="col-sm-12 col-md-6 col-lg-6">
+                                <label for="input">Imagen: </label>
+                                <input class="form-control" type="file" name="imagep" id="_image"   onChange={ChangeImage} required />
                                 </div>
                                 <div className="col-sm-12 col-md-6 col-lg-6">
                                     <label for="select">Categories: </label>
@@ -214,5 +254,5 @@ export default function ProveedorPage(props) {
                 </div>
             </div>
         </div >
-    )
+)
 }

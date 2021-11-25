@@ -77,7 +77,7 @@ export default function Home() {
     const numbers = props.numbers;
     const listItems = numbers.map((number) =>
       <div className="card">
-        <img src={placehold} className="card-img-top" alt="..." />
+        <img src={number.image} className="card-img-top img-cont" alt="..." />
         <div className="card-body aligns-products" >
           <Link className="link_" to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
           <p className="card-text">{number.description}</p>

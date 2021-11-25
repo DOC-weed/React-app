@@ -3,6 +3,13 @@
     background-color: #877D85;
 }
 
+.img-cont {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    padding: 20px;
+}
+
 .childrenone img {
     width: 100%;
     object-fit: cover;
@@ -17,8 +24,9 @@
     text-align: center;
     padding: 3%;
 }
-.link_{
-    color:#16A0C7!important;
+
+.link_ {
+    color: #16A0C7!important;
     text-decoration: none;
 }
 
@@ -29,7 +37,6 @@
 
 .childrenone {
     width: 20%;
-
     padding: 10px;
 }
 
@@ -58,9 +65,11 @@
     height: 500px;
     object-fit: cover;
 }
-.aligns-products{
+
+.aligns-products {
     text-align: center;
 }
+
 .products {
     display: block;
 }
