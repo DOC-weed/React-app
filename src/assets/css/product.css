@@ -26,9 +26,17 @@
     margin: auto;
 }
 
-.col_1 {}
+.col_1 {
+    width: 50%;
+}
+
+.product_image {
+    width: 100%;
+    object-fit: cover;
+}
 
 .col_2 {
+    width: 50%;
     padding: 10px;
     color: white;
 }

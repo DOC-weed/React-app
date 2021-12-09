@@ -44,7 +44,7 @@ export default function Checkout(){
             const numbers = props.numbers;
             const listItems = numbers.map((number) =>
             <div className="card_custom">
-              <img src={logo} className="card-img-top" alt="..."/>
+              <img src={number.image} className="card-img-top" alt="..."/>
               <div className="card-body_custom">
                 <p ><b>{number.name}</b></p>
                 <p >{number.description}</p>
@@ -115,6 +115,9 @@ export default function Checkout(){
                 text: "Paypal transaction complete",
                 icon: "success"
               });
+              let date2 = new Date(details.create_time);
+              let dateFormat = date2.toLocaleString()
+              console.log(dateFormat);
               let obj={
                 customer_id:id,
                 amount:total,
@@ -122,9 +125,10 @@ export default function Checkout(){
                 order_address:user.billing_address,
                 order_email:"joulura16@gmail.com",
                 order_status:details.status,
-                order_date:details.create_time,
+                order_date:dateFormat,
                 order_details: []
               }
+              
               axios.post(url+'orders',obj).then(res=>{
                 console.log(res);
                 localStorage.removeItem('cart')

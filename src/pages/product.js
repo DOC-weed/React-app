@@ -53,6 +53,7 @@ export default function Product(props){
               name:dataProduct.name,
               description:dataProduct.description,
               price:dataProduct.price,
+              image:dataProduct.image,
               quantity:quantity
             }
             let arrayP = [];
@@ -98,7 +99,7 @@ export default function Product(props){
                 </div> 
             <div className="product_container py-5">
                 <div className="col_1 p-1">
-                    <img src={logo}/>
+                    <img className="product_image" src={dataProduct.image}/>
                 </div>
                 <div className="col_2">
                 

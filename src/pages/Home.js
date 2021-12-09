@@ -29,7 +29,7 @@ export default function Home() {
   const [searchProducts, serSearchProducts] = React.useState([]);
 
 
-  async function add_to(_name,_desc,_price) {
+  async function add_to(_name,_desc,_price,_image) {
     if (accesToken === '' || accesToken === null) {
       swal({
         title: "I don't know",
@@ -43,7 +43,8 @@ export default function Home() {
         name:_name,
         description:_desc,
         price:_price,
-        quantity:1
+        quantity:1,
+        image:_image
       }
       let arrayP = [];
       let cart = localStorage.getItem('cart');
@@ -82,7 +83,7 @@ export default function Home() {
           <Link className="link_" to={`/product/${number._id}`} ><h5 className="card-title">{number.name}</h5></Link>
           <p className="card-text">{number.description}</p>
           <p className="card-text">${number.price}</p>
-          <button className="btn btn-warning" onClick={() => add_to(number.name,number.description,number.price)}>Add to cart</button>
+          <button className="btn btn-warning" onClick={() => add_to(number.name,number.description,number.price,number.image)}>Add to cart</button>
         </div>
       </div>
     );

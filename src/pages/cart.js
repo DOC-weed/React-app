@@ -98,7 +98,8 @@ class Cart extends Component {
                     name: i.name,
                     description: i.description,
                     price: i.price,
-                    quantity: value
+                    quantity: value,
+                    image:i.image
                 }
                 arr.push(obj)
             }else{
@@ -110,10 +111,11 @@ class Cart extends Component {
 
     CartList(data) {
         const cart = data;
+        console.log(cart);
         const listItems = cart.map((item, index) =>
             <div className="container_cart_list pb-2">
                 <div className="cart_list_img px-3 py-3">
-                    <img src={logo} alt="logo" />
+                    <img src={item.image} alt="logo" />
                 </div>
                 <div className="cart_list_text">
                     <h2>{item.name}</h2>

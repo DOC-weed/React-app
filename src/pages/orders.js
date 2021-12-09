@@ -10,12 +10,14 @@ export default function Order(){
     
     useEffect(async () => {
         await axios.get(url+'ordersCustomer/'+id).then(res=>{
+            console.log(res.data.orderDB);
             setorders(res.data.orderDB);
         }).catch(err=>{
 
         });
     }, [])
     console.log(orders);
+   
 
     return(
         <>
@@ -40,11 +42,12 @@ export default function Order(){
                 {
                     
                     orders.map((p, index)=>(
-                        <tr>
+                        
+                        <tr key={index}>
                             <td>{index+1}</td>
                             <td>{p._id}</td>
                             <td> ${p.amount}</td>
-                            <td>{p.order_date}</td>
+                            <td>{new Date(p.order_date).toLocaleString()}</td>
                             <td>{p.order_status}</td>
                         </tr>
                     ))
