@@ -17,7 +17,16 @@ const OFFLINE_VERSION = 1;
 const CACHE_NAME = 'offline';
 // Customize this with a different URL if needed.
 const OFFLINE_URL = 'offline.html';
-const OFFLINE_Image = '/static/media/kawaii.7597ed2e.png';
+const OFFLINE_IMAGES = ['/static/media/banner.e996d8ae.jpeg',
+'/static/media/kawaii.7597ed2e.png',
+'/static/media/mision.9385891b.png',
+'/static/media/profile.2fda6558.png',
+'/static/media/promo1.cd3bbda1.png',
+'/static/media/promo2.9de24960.jpeg',
+'/static/media/promo3.d6bbb625.jpeg',
+'/static/media/searchIcon.9d926dcd.png',
+'/static/media/us.97d0411c.png',
+'/static/media/vision.7444dfd6.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -25,7 +34,7 @@ self.addEventListener('install', (event) => {
     // Setting {cache: 'reload'} in the new request will ensure that the response
     // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
     await cache.add(new Request(OFFLINE_URL, {cache: 'reload'}));
-    await cache.add(new Request(OFFLINE_Image, {cache: 'reload'}));
+    await cache.addAll(new Request(OFFLINE_IMAGES, {cache: 'reload'}));
   })());
   // Force the waiting service worker to become the active service worker.
   self.skipWaiting();
