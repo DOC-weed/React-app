@@ -23,6 +23,7 @@ export default function Home() {
 
 
   const [products, setproducts] = React.useState([]);
+  const [offline, setoffline] =React.useState(false);
   const url = 'https://dwi-back-end.herokuapp.com/';
   let accesToken = localStorage.getItem('token');
 
@@ -92,6 +93,7 @@ export default function Home() {
     );
   }
   useEffect(async () => {
+    if(!navigator.onLine) {setoffline(true);}
     await axios.get(url + 'product').then(res => {
       setproducts(res.data.product);
       serSearchProducts(res.data.product);
@@ -122,6 +124,7 @@ export default function Home() {
 
   return (
     < >
+     
       <HeaderComponent />
       <div className="father">
 
@@ -175,7 +178,8 @@ export default function Home() {
             <div>
               <input type="text" id="myInput" name="search" onChange={Search} placeholder="Search products..." />
             </div>
-            <NumberList numbers={products} />
+            {(offline)?<div>You are offline please connect to the internet<button>Refresh</button></div>: <NumberList numbers={products} /> }
+           
 
 
           </div>

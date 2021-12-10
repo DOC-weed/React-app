@@ -8,16 +8,18 @@ import { MdDelete } from 'react-icons/md'
 import { GrAdd } from 'react-icons/gr'
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-
-
+import Camera from '../components/camera.js'
 
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+
+import { storage, db } from '../firebase';
 
 export default function Home2() {
     const [customerId, setCustomerId] = React.useState(localStorage.getItem('_id'));
     const [sellerData, setSellerData] = React.useState([]);
-    
+
     const [products, setProducts] = React.useState([]);
 
     const [name, setName] = React.useState('');
@@ -31,13 +33,27 @@ export default function Home2() {
     const [editSeller, setEditSeller] = React.useState(false);
     const [mode, setMode] = React.useState(false);
 
+    const [show, setShow] = useState(false);
+
+    const [defaultImg, setDefaultImg] = useState(profile);
+    const [photo, setPhoto] = useState(null);
+    const [capturedImage, setCapturedImage] = useState(null)
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     useEffect(() => {
         getSellerData();
         getProducts();
     }, []);
 
+    const __savePhoto = (capture) => {
+        setPhoto(capture);
+        setCapturedImage(capture);
+    }
+
     async function getSellerData() {
-        await axios.get(`https://dwi-back-end.herokuapp.com/customer/${customerId}`).then(c => {
+        await axios.get(`https://dwi-back-end.herokuapp.com/customer/${customerId}`).then(async c => {
             for (const s of [c.data.customerDB]) {
                 setName(s.full_name);
                 setEmail(s.email)
@@ -47,6 +63,13 @@ export default function Home2() {
                 setCountry(s.country)
                 setCustomer_Type(s.customer_type)
             }
+            await storage.ref("profile/" + customerId).getDownloadURL().then(profile => {
+                setPhoto(profile);
+                setCapturedImage(null);
+            }).catch(e => {
+                setPhoto(defaultImg);
+                setCapturedImage(null);
+            });
             setSellerData([c.data.customerDB])
         })
     }
@@ -69,7 +92,7 @@ export default function Home2() {
                     arr.push(obj);
                 }
                 setProducts(arr)
-                
+
             })
         })
     }
@@ -99,6 +122,15 @@ export default function Home2() {
 
     async function Save(e) {
         e.preventDefault();
+        if (capturedImage != null) {
+            const response = await fetch(capturedImage)
+            const blob = await response.blob();
+            await storage.ref("profile/" + customerId).put(blob).then(res => {
+                Cancel();
+            }).catch(err => {
+                Cancel();
+            });
+        }
 
         const obj = {
             full_name: name,
@@ -124,6 +156,7 @@ export default function Home2() {
 
     function Cancel() {
         setEditSeller(false);
+        setCapturedImage(null);
         getSellerData();
     }
 
@@ -140,8 +173,7 @@ export default function Home2() {
 
     return (
         <div id="pricipal" className={(mode) ? "darkmode" : "normal"} style={{ width: '100%' }}>
-            <Header/>
-
+            <Header />
             <div>
                 <div className="containerAdd">
                     <input type="checkbox" id="btn-mas" />
@@ -165,7 +197,15 @@ export default function Home2() {
                         {
                             sellerData.map((s, index) => (
                                 <div key={index}>
-                                    <img id="imgProfile" src={profile} alt="profileImg" />
+                                    <div id="imgProfile">
+                                        <img style={{ width: '100%' }} src={photo} alt="profileImg" />
+                                        {
+                                            (editSeller) ?
+                                                <Button onClick={handleShow} variant="secondary" style={{ position: 'absolute', width: '100%', bottom: 0, backgroundColor: 'rgb(0,0,0,0.45)' }}>Editar</Button>
+                                                :
+                                                ''
+                                        }
+                                    </div>
                                     {(editSeller) ?
                                         <>
                                             <form style={{ textAlign: 'left', margin: '20px', }} onSubmit={Save}>
@@ -219,58 +259,71 @@ export default function Home2() {
                             {<input type="text" id="myInput" onKeyUp={myFunction} placeholder="Search for product name..." />}
 
                             <div style={{ overflowY: 'scroll', display: 'flex', height: '80%' }}>
-                            <table id="myTable">
-                                <thead className="header">
-                                    <tr>
-                                        <th scope="col" style={{ width: '35%' }}>Products</th>
-                                        <th scope="col" style={{ width: '20%' }}>Category</th>
-                                        <th scope="col" style={{ width: '15%', textAlign: 'right' }}>Stock</th>
-                                        <th scope="col" style={{ width: '15%', textAlign: 'right' }}>Price</th>
-                                        <th scope="col" style={{ width: '15%' }}></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        products.map((p, index) => (
-                                            <tr key={index}>
-                                                <td>{p.name}</td>
-                                                <td>{p.category.name}</td>
-                                                <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.stock).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} /></td>
-                                                <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.price).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} prefix={'$ '} /></td>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <Link to={`/products/${customerId}/${p._id}`} >
-                                                        <BiEdit />
-                                                    </Link>
-                                                    <a onClick={() => {
-                                                        swal({
-                                                            title: `DELETE PRODUCT ${p.name}`,
-                                                            text: "Are you sure to remove this product?",
-                                                            icon: "warning",
-                                                            buttons: true,
-                                                            dangerMode: true,
-                                                        })
-                                                            .then((willDelete) => {
-                                                                if (willDelete) {
-                                                                    deleteProduct(p._id);
-                                                                } else {
+                                <table id="myTable">
+                                    <thead className="header">
+                                        <tr>
+                                            <th scope="col" style={{ width: '35%' }}>Products</th>
+                                            <th scope="col" style={{ width: '20%' }}>Category</th>
+                                            <th scope="col" style={{ width: '15%', textAlign: 'right' }}>Stock</th>
+                                            <th scope="col" style={{ width: '15%', textAlign: 'right' }}>Price</th>
+                                            <th scope="col" style={{ width: '15%' }}></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            products.map((p, index) => (
+                                                <tr key={index}>
+                                                    <td>{p.name}</td>
+                                                    <td>{p.category.name}</td>
+                                                    <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.stock).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} /></td>
+                                                    <td style={{ textAlign: 'right' }}><NumberFormat value={parseFloat(p.price).toFixed(2)} displayType={'text'} decimalScale={2} thousandSeparator={true} prefix={'$ '} /></td>
+                                                    <td style={{ textAlign: 'center' }}>
+                                                        <Link to={`/products/${customerId}/${p._id}`} >
+                                                            <BiEdit />
+                                                        </Link>
+                                                        <a onClick={() => {
+                                                            swal({
+                                                                title: `DELETE PRODUCT ${p.name}`,
+                                                                text: "Are you sure to remove this product?",
+                                                                icon: "warning",
+                                                                buttons: true,
+                                                                dangerMode: true,
+                                                            })
+                                                                .then((willDelete) => {
+                                                                    if (willDelete) {
+                                                                        deleteProduct(p._id);
+                                                                    } else {
 
-                                                                }
-                                                            });
-                                                    }}>
-                                                        <MdDelete />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
+                                                                    }
+                                                                });
+                                                        }}>
+                                                            <MdDelete />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </>
                     </div>
                 </div>
             </div>
-
+            <Modal show={show} onHide={handleClose}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Profile Photo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><Camera save={__savePhoto} /></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Back
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

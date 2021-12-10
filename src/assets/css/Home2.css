@@ -1,4 +1,4 @@
-#menuProveedor{
+#menuProveedor {
     height: 100vh;
     background-color: #36393b;
     text-align: center;
@@ -6,77 +6,79 @@
     padding: 2%;
 }
 
-#menuProveedor p{
-  font-size: 20px;
+#menuProveedor p {
+    font-size: 20px;
 }
 
 #imgProfile {
+    position: relative;
     margin: 10px auto;
-    width: 50%;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: black 1px solid;
     display: flex;
+    overflow: hidden;
 }
 
-#products{
-  font-size: 30px;
-  padding-top: 2%;
+#products {
+    font-size: 30px;
+    padding-top: 2%;
 }
 
-#btn-mas{
-  display: none;
-}
-.containerAdd{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
-
+#btn-mas {
+    display: none;
 }
 
-.icon-mas2{
-  display: block;
-  text-decoration: none;
-  background: #afd0d6;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  font-weight: bolder;
-  line-height: 60px;
-  text-align: center;
-  border-radius: 50%;
-  box-shadow: 13px 10px 10px rgba(0, 0, 0, 0.4);
-  transition: all 500ms ease;
-  cursor: pointer;
-  z-index: 10;
+.containerAdd {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
 }
 
-.Wallet{
-  text-align: right;
+.icon-mas2 {
+    display: block;
+    text-decoration: none;
+    background: #afd0d6;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    font-weight: bolder;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 13px 10px 10px rgba(0, 0, 0, 0.4);
+    transition: all 500ms ease;
+    cursor: pointer;
+    z-index: 10;
 }
 
-table a{
-  text-align: center;
-  margin: 10px;
-  font-size: 30px;
-  cursor: pointer;
-  text-decoration: none;
+.Wallet {
+    text-align: right;
 }
 
-table Link{
-  text-decoration: none;
+table a {
+    text-align: center;
+    margin: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.btn-editSeller button{
-  margin: 10px;
+table Link {
+    text-decoration: none;
 }
 
-.save{
-  border: 1px solid #a5d8ff !important;
-  background-color: #a5d8ff !important;
+.btn-editSeller button {
+    margin: 10px;
 }
 
-  
+.save {
+    border: 1px solid #a5d8ff !important;
+    background-color: #a5d8ff !important;
+}
+
 #myInput {
     background-image: url('../images/searchIcon.png');
     background-size: 25px;
@@ -87,54 +89,57 @@ table Link{
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
-  }
-  
-  #myTable {
+}
+
+#myTable {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
     font-size: 18px;
-  }
-  
-  #myTable th, #myTable td {
+}
+
+#myTable th,
+#myTable td {
     text-align: left;
     padding: 12px;
-  }
-  
-  #myTable tr {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  #myTable tr.header, #myTable tr:hover {
-    background-color: #f1f1f1;
-  }
+}
 
-  @media (max-width: 750px) {
-    *{
-      font-size: 15px !important;
+#myTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header,
+#myTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 750px) {
+    * {
+        font-size: 15px !important;
     }
-    #menuProveedor{
-      height: auto;
-      width: 100%;
+    #menuProveedor {
+        height: auto;
+        width: 100%;
     }
     #imgProfile {
-      width: 30%;
-  }
-  }
+        width: 30%;
+    }
+}
 
-  .darkmode{
+.darkmode {
     background-color: rgba(32, 32, 44, 0.9);
     color: white;
-  }
+}
 
-  .darkmode thead:hover{
+.darkmode thead:hover {
     background-color: gray !important;
-  }
+}
 
-  .darkmode tr:hover{
+.darkmode tr:hover {
     background-color: gray !important;
-  }
+}
 
-  .darkmode #menuProveedor{
-    background-color: rgba(32, 32, 44);;
-  }
+.darkmode #menuProveedor {
+    background-color: rgba(32, 32, 44);
+    ;
+}

@@ -30,7 +30,14 @@ if (firebase.apps.length === 0) {
     app = firebase.app();
 }
 
-
+firebase.messaging().requestPermission()
+.then(function(token) {
+ console.log('Recibido permiso.');
+ // En el parámetro "token" tienes el código para poder enviar las notificaciones
+})
+.catch(function(err) {
+ console.log('No se ha obtenido permiso', err);
+});
 
 const storage = firebase.storage();
 
