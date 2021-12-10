@@ -5,11 +5,337 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
 <body>
-    Come caca
+    <style>
+        .HeaderBackground {
+            background-color: transparent;
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        .bg-custom-1 {
+            background-color: #E1D516;
+            border-color: #E1D516;
+        }
+        
+        .bg-custom-2 {
+            background-color: #E1D516;
+            border-color: #E1D516;
+        }
+        
+        .bg-custom-3 {
+            background-color: #16A0C7!important;
+            border-color: #16A0C7!important;
+            color: white;
+        }
+        
+        .logout-btn {
+            border: 1px solid #fff;
+        }
+        
+        .bg-custom-3 a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        .hide {
+            display: none;
+        }
+        
+        .primary-navbar {
+            width: 100%;
+        }
+        
+        .navegacion {
+            color: white;
+        }
+        
+        .pagina {
+            width: 250px;
+            object-fit: cover;
+        }
+        
+        .fondo {
+            background-color: #FE6721;
+            width: 100%;
+        }
+        
+        .searchBar {
+            width: 50%;
+        }
+        
+        .button_form {
+            width: 20%
+        }
+        
+        .input_form {
+            width: 70%!important;
+        }
+        
+        .span {
+            font-size: 20px!important;
+            padding: 10px!important;
+        }
+        
+        .navbar-links {
+            display: flex;
+            justify-content: center;
+        }
+        
+        @media(max-width:992px) {
+            .navbar-nav {
+                flex-direction: row!important;
+            }
+        }
+        
+        @media (max-width:500px) {
+            .pagina {
+                width: 150px;
+            }
+            .justify-content-end {
+                justify-content: space-around!important;
+            }
+        }
+        
+        .father {
+            width: 100%;
+            background-color: #877D85;
+            height: 100vh;
+        }
+        
+        .img-cont {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            padding: 20px;
+        }
+        
+        .childrenone img {
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .btn-primary {
+            background-color: #E1D516!important;
+            border-color: #E1D516!important;
+        }
+        
+        .childrenone h2 {
+            text-align: center;
+            padding: 3%;
+        }
+        
+        .link_ {
+            color: #16A0C7!important;
+            text-decoration: none;
+        }
+        
+        .container_2_home {
+            display: flex;
+            width: 100%;
+        }
+        
+        .childrenone {
+            width: 20%;
+            padding: 10px;
+        }
+        
+        .childrentwo {
+            width: 80%;
+            padding: 20px;
+        }
+        
+        .conttt {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            width: 100%;
+        }
+        
+        .container_1_home {
+            height: 500px;
+        }
+        
+        .container_1_home h3,
+        .container_1_home p {
+            color: black!important;
+        }
+        
+        .img-slider {
+            height: 500px;
+            object-fit: cover;
+        }
+        
+        .aligns-products {
+            text-align: center;
+        }
+        
+        .products {
+            display: block;
+        }
+        
+        .products_container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px;
+        }
+        
+        .children_products {
+            width: 20%;
+        }
+        
+        @media (max-width:900px) {
+            .childrenone {
+                display: none;
+            }
+            .childrentwo {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width:600px) {
+            .conttt {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        
+        .container_footer {
+            display: flex;
+            align-items: baseline;
+            background-color: rgba(0, 0, 0, 0.425);
+        }
+        
+        .img-container {
+            width: 30%;
+            padding: 10px;
+        }
+        
+        .text-container {
+            width: 60%;
+            text-align: center;
+        }
+        
+        .img {
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .text {
+            text-align: center;
+            font-size: 12px;
+            margin: 0;
+        }
+        
+        .kawaii-container {
+            width: 10%;
+        }
+        
+        .kawaii-container img {
+            width: 100%;
+            margin-left: -50px;
+        }
+        
+        @media (max-width:700px) {
+            .container_footer {
+                display: block;
+            }
+            .img-container {
+                width: 100%;
+                text-align: center;
+            }
+            .text-container {
+                width: 100%;
+                text-align: center;
+            }
+            .img {
+                width: 50%;
+                object-fit: cover;
+            }
+            .kawaii-container {
+                display: none;
+            }
+        }
+    </style>
+    <div>
+        <nav class="fondo navbar navbar-expand-lg navbar-light">
+            <a href="/home" class="navbar-brand"><img class="pagina" src="/images/logo.png" alt=""></a><button aria-controls="basic-navbar-nav" type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed"><span class="navbar-toggler-icon"></span></button>
+            <div class="justify-content-end primary-navbar navbar-collapse collapse" id="basic-navbar-nav">
+                <div class="justify-content-end nav_bar navbar-nav"><a href="/orders" data-rb-event-key="/orders" class="navegacion nav-link"><span class="badge bg-custom-3 span">Orders</span></a><a href="#" class="navegacion nav-link" role="button" style="color: white;"><span class="badge bg-custom-3 span "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#000" stroke-width="2" d="M5,5 L22,5 L20,14 L7,14 L4,2 L0,2 M7,14 L8,18 L21,18 M19,23 C18.4475,23 18,22.5525 18,22 C18,21.4475 18.4475,21 19,21 C19.5525,21 20,21.4475 20,22 C20,22.5525 19.5525,23 19,23 Z M9,23 C8.4475,23 8,22.5525 8,22 C8,21.4475 8.4475,21 9,21 C9.5525,21 10,21.4475 10,22 C10,22.5525 9.5525,23 9,23 Z"></path></svg> <span class="badge bg-secondary"></span></span></a>
+                    <a href="/seller/profile" data-rb-event-key="/seller/profile" class="navegacion nav-link" style="color: white;"><span class="badge bg-custom-3 span">Dashboard</span></a><a href="#" class="navegacion nav-link" role="button"><span class="badge bg-danger logout-btn span"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="#231F20" stroke-width="2" d="M13,9 L13,2 L1,2 L1,22 L13,22 L13,15 M22,12 L5,12 M17,7 L22,12 L17,17"></path></svg></span></a></div>
+            </div>
+        </nav>
+        <div class="navbar justify-content-center bg-custom-3 nav">
+            <a href="/us" data-rb-event-key="/us" class="nav-link">About us</a>
+            <a href="/contactus" data-rb-event-key="/contactus" class="nav-link">Contact us</a>
+            <a href="/vision" data-rb-event-key="/vision" class="nav-link">Vision</a>
+            <a href="/mision" data-rb-event-key="/mision" class="nav-link">Mision </a>
+        </div>
+    </div>
+
+    <div class="father">
+        <div class="text-center p-5">
+            <div class="spinner-border" style="width: 200px;height: 200px;" role="status">
+                <span class="sr-only">Loading...</span>
+
+            </div>
+
+        </div>
+        <div class="text-center">
+            <h5 class="p-3">Parece que no estas conectado a internet, presiona el boton para refrescar la página</h5>
+            <button class="btn btn-primary" type="button">⤾ Reload</button>
+        </div>
+
+    </div>
+    <footer>
+        <div class="container_footer">
+            <div class="kawaii-container"><img src="/static/media/kawaii.7597ed2e.png" alt="logokawai"></div>
+            <div class="text-container">
+                <p class="text">This project was developed by students from the Universidad Tecnologica de Aguascalientes</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Inline the page's JavaScript file. -->
+    <script>
+        document.querySelector('button').addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        // Listen to changes in the network state, reload when online.
+        // This handles the case when the device is completely offline.
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+
+        // Check if the server is responding & reload the page if it is.
+        // This handles the case when the device is online, but the server
+        // is offline or misbehaving.
+        async function checkNetworkAndReload() {
+            try {
+                const response = await fetch('.');
+                // Verify we get a valid response from the server
+                if (response.status >= 200 && response.status < 500) {
+                    window.location.reload();
+                    return;
+                }
+            } catch {
+                // Unable to connect to the server, ignore.
+            }
+            window.setTimeout(checkNetworkAndReload, 2500);
+        }
+
+        checkNetworkAndReload();
+    </script>
 </body>
 
 </html>
