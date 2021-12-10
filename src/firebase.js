@@ -29,14 +29,20 @@ if (firebase.apps.length === 0) {
 } else {
     app = firebase.app();
 }
-
-firebase.messaging().requestPermission()
-.then(function(token) {
- console.log('Recibido permiso.');
- // En el parámetro "token" tienes el código para poder enviar las notificaciones
-})
-.catch(function(err) {
- console.log('No se ha obtenido permiso', err);
+const messaging = firebase.messaging();
+messaging.getToken({ vapidKey: 'BPyWn4m9yiCCItKhUuaaf5mkhisrat7dxNRVwuDy0cm5uVvgp8ZaHqsf5OVZ-yFf-H2G-BVwQNSTJiYsXC8-nnI' }).then((currentToken) => {
+  if (currentToken) {
+    // Send the token to your server and update the UI if necessary
+    // ...
+    console.log(currentToken);
+  } else {
+    // Show permission request UI
+    console.log('No registration token available. Request permission to generate one.');
+    // ...
+  }
+}).catch((err) => {
+  console.log('An error occurred while retrieving token. ', err);
+  // ...
 });
 
 const storage = firebase.storage();
